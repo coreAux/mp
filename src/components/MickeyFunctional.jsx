@@ -1,6 +1,11 @@
 import React from "react"
 import RobotoBlack from "../fonts/Roboto-Black.ttf"
-import p5 from "p5"
+// import p5 from "p5"
+
+if (typeof window !== `undefined`) {
+  // Component
+  const p5 = React.lazy(() => import('p5'));
+}
 
 const MickeyFunctional = ({ darkmode, scrollY, withFont }) => {
   const [windowWidth, setWindowWidth] = React.useState(100)
