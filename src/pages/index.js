@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react"
 
-import Mickey from "../components/Mickey"
-import MickeyFunctional from "../components/MickeyFunctional"
+// import Mickey from "../components/Mickey"
+// import MickeyFunctional from "../components/MickeyFunctional"
+
+import Loadable from "@loadable/component";
+const Mickey = Loadable(() => import('../components/Mickey'))
+const MickeyFunctional = Loadable(() => import('../components/MickeyFunctional'))
+
+
 
 const IndexPage = () => {
   const [darkmode, setDarkmode] = useState(false)
