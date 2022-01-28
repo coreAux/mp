@@ -1,8 +1,12 @@
 import React, { createRef } from "react"
+import styled from "styled-components"
 import RobotoBlack from "../fonts/Roboto-Black.ttf"
 import p5 from "p5"
-// import Loadable from "@loadable/component";
-// const p5 = Loadable(() => import('p5'))
+
+const MickeyWrapper = styled.div`
+  width: calc(100% - env(safe-area-inset-right) - env(safe-area-inset-left));
+  height: 100vh;
+`
 
 class Mickey extends React.Component {
   constructor(props) {
@@ -22,12 +26,14 @@ class Mickey extends React.Component {
 
     p5.setup = () => {
       p5.createCanvas(p5.windowWidth, p5.windowHeight)
+      // console.log(p5.windowWidth)
+      // console.log(p5.windowHeight)
 
       graphic = p5.createGraphics(p5.windowWidth, p5.windowHeight)
       graphicTwo = p5.createGraphics(p5.windowWidth, p5.windowHeight)
 
       graphic.fill("#f1f0f5")
-      graphicTwo.fill("#010005")
+      graphicTwo.fill("#111015")
       graphic.textFont(font)
       graphicTwo.textFont(font)
 
@@ -50,7 +56,7 @@ class Mickey extends React.Component {
 
     p5.draw = () => {
       if (this.props.darkmode) {
-        p5.background("#010005")
+        p5.background("#111015")
       } else {
         p5.background("#f1f0f5")
       }
@@ -68,8 +74,6 @@ class Mickey extends React.Component {
         if (position < 0) {
           position = 0
         }
-
-        // position = easeInOutQuart(position)
 
         // Source
         const sx = 0
@@ -115,33 +119,22 @@ class Mickey extends React.Component {
   }
 
   componentDidMount() {
-    console.log("DidMount")
-    new p5(this.Sketch, this.p5Ref.current)
+    const myP5 = new p5(this.Sketch, this.p5Ref.current)
+    myP5.windowWidth = this.props.windowWidth
+    myP5.windowHeight = this.props.windowHeight
   }
 
   componentWillUnmount() {
-    console.log("WillUnmount")
+    while (this.p5Ref.firstChild) {
+      this.p5Ref.firstChild.remove()
+    }
   }
 
-  // componentDidUpdate() {
-  //   console.log("ref: ", this.p5Ref)
-  //   console.log("sketch: ", this.Sketch)
-  // }
-
   render() {
-    const { scrollY } = this.props
-
     return (
-      <div
-        style={{
-          width: "100vw",
-          height: "100vh",
-          background: "transparent"
-        }}
+      <MickeyWrapper
         ref={this.p5Ref}
-      >
-      <p>ScrollY: {scrollY}</p>
-      </div>
+      />
     )
   }
 }

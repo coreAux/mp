@@ -1,61 +1,86 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 
-// import Mickey from "../components/Mickey"
-// import MickeyFunctional from "../components/MickeyFunctional"
+import { SafeArea, Emoji } from "../styles"
 
-import Loadable from "@loadable/component";
-const Mickey = Loadable(() => import('../components/Mickey'))
-const MickeyFunctional = Loadable(() => import('../components/MickeyFunctional'))
+import SEOComponent from "../components/SEOComponent"
+import Loadable from "@loadable/component"
+const Mickey = Loadable(() => import("../components/Mickey"))
 
+const IndexPage = ({ scrollY, darkmode }) => {
+  const [windowWidth, setWindowWidth] = React.useState(0)
+  const [windowHeight, setWindowHeight] = React.useState(0)
 
-
-const IndexPage = () => {
-  const [darkmode, setDarkmode] = useState(false)
-  const [withFont, setWithFont] = useState(true)
-  const [show, setShow] = useState(true)
-  const [scrollY, setScrollY] = useState(0)
-
-  useEffect(() => {
+  React.useEffect(() => {
     if (typeof window !== undefined) {
-      const getScrollY = () => setScrollY(window.pageYOffset)
-      window.addEventListener("scroll", getScrollY)
-      getScrollY()
+      const handleResize = () => {
+        setWindowWidth(window.innerWidth)
+        setWindowHeight(window.innerHeight)
+      }
 
-      return () => window.removeEventListener("scroll", getScrollY)
+      window.addEventListener("resize", handleResize)
+      handleResize()
+
+      return () => window.removeEventListener("resize", handleResize)
     }
   }, [])
 
   return (
-    <main style={{height: "200vh"}}>
-      <h1>p5?</h1>
-      <button
-        onClick={() => setDarkmode(!darkmode)}
+    <>
+      <SEOComponent
+        title="Mickey"
+        description="MaMickster..."
+      />
+      <div
+        style={{
+          display: "grid",
+          placeItems: "center",
+          overflow: "hidden"
+        }}
       >
-        {darkmode ? "Darkmode" : "Lightmode"}
-      </button>
 
-      {!show && <button
-        onClick={() => setWithFont(!withFont)}
-      >
-        Preload font: {withFont ? "Preloading" : "No font preloaded"}
-      </button>}
+        <div
+          style={{
+            height: "75vh",
+            gridArea: "1 / 1 / auto / auto"
+          }}
+        >
+          <Mickey
+            windowWidth={windowWidth}
+            windowHeight={windowHeight}
+            scrollY={scrollY}
+            darkmode={darkmode}
+          />
+        </div>
 
-      <button
-        onClick={() => setShow(!show)}
-      >
-        Currently showing: {show ? "Class Component" : "Functional Component"}
-      </button>
-      <p>Index.jsx: {scrollY}</p>
-      {show && <Mickey
-        scrollY={scrollY}
-        darkmode={darkmode}
-      />}
-      {!show && <MickeyFunctional
-        scrollY={scrollY}
-        withFont={withFont}
-        darkmode={darkmode}
-      />}
-    </main>
+        <div
+          style={{
+            height: "75vh",
+            zIndex: 2,
+            gridArea: "1 / 1 / auto / auto"
+          }}
+        >
+          <h1>
+            Bruh
+          </h1>
+        </div>
+
+      </div>
+      <SafeArea>
+        <h1>Mickey / Header 1</h1>
+        <p>
+          <Emoji role="img" aria-label="Party Face">🥳</Emoji>
+          Mickey is a front end ninja who’s been fidgeting with <code>HTML</code>, <code>CSS</code>, and <code>JavaScript</code> since the days when layouts were made with <code>iframe</code>-tags and the <code>marquee</code>-tag was the coolest thing on the Internet.
+        </p>
+        <p>
+          Mickey is passionate about creating stuff for the Web, and recognised by his keen eye for detail, structured way of working (<em>mise en place</em>), and for being a quick learner.
+        </p>
+      </SafeArea>
+      <SafeArea>
+        <h1>Principles / Beliefs / Values</h1>
+        <h2>{"Style, function, personality"}</h2>
+        <p>I love creating unique and personal websites, just like back in the &rsquo;90s</p>
+      </SafeArea>
+    </>
   )
 }
 

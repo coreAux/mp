@@ -1,0 +1,37 @@
+---
+date: 2022-01-24
+title: Three.js with React Hooks
+category: development
+---
+
+## 1. Create your project
+
+Assuming you don't already have a React project up and running, the easiest way to start a new one is to run npx create-react-app my-app in your command line, wait for the initiation to finish, and then navigate to the new folder of your React app by running cd my-app.
+
+## 2. Install and import Three.js
+
+While in the command line, let's install Three.js. Run npm install three to install Three.js as a dependency to your project. Before jumping into our code, let's start our app up by running npm start. Navigate to localhost:3000. If everything has gone well we should now see the default start page which encourages us to "edit src/App.js and save to reload". Let's oblige!
+
+## 3. Import Three, useEffect, and useRef
+
+Let's clean up our App.js a bit by removing lines we won't be needing and importing:
+useEffect (which we will use to add and remove our Three.js scene once the component has mounted),
+useRef (to tell React where the scene should be mounted), and
+the Three.js-library.
+
+## 4. Copy-paste our Three.js code
+
+We've now set up our useEffect-function and copy-pasted code from the Three.js guide on how to create a scene into it (I've added some spacing for better legibility). This code appends the scene directly to the document body, on line 14: document.body.appendChild(renderer.domElement).
+This might not look like an issue at all initially but if we have a look in our developer tools we can see that the canvas has been appended at the very end of our `<body>` tag, this becomes even more obvious if we add a line of text between our `<div>` tags. Let's resolve this in the next step!
+
+## 5. Use useRef to mount the scene onto our div
+
+We define a const called mountRef and assign it useRef(null) before our useEffect-function. We then tell React that the reference we created should reference our `<div>` element by adding ref={mountRef} as an attribute. Finally we replace document.body with mountRef.current to mount the scene to our referenced `<div>` element.
+
+## 6. Cleaning things up
+
+If you've saved the file a couple of times while keeping a browser open, you'll notice how we have plenty of scenes added to our page. This is because every time we save, the component gets re-rendered and appends another scene to our page. Before step 5 we didn't have any cleanup in our useEffect-function. The line which was added on line 34 in step 5 tells React that before the component is unmounted it should remove the scene from our `<div>` element and add it anew when the component is mounted again. If you now update your browser manually you'll notice how there's only one scene on the page.
+
+## 7. Finishing touches
+
+Finally we want our scene to adapt its size when the window is resized. On rows 31–37 we have added a simple function which resizes our camera, updates the projection matrix, and tells the renderer to resize. Easy!

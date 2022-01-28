@@ -1,11 +1,17 @@
 module.exports = {
   siteMetadata: {
-    title: `Mickey`,
-      siteUrl: `https://www.yourdomain.tld`,
+    title: "Mickey",
+      siteUrl: "https://www.mikaelpetersen.se/",
   },
   plugins: [
     {
       resolve: "gatsby-plugin-styled-components"
+    },
+    {
+      resolve: "gatsby-plugin-google-analytics",
+      options: {
+        "trackingId": "G-69YD8ETXJE"
+      }
     },
     {
       resolve: "gatsby-plugin-react-helmet"
@@ -16,8 +22,8 @@ module.exports = {
         name: "Mickey",
         short_name: "Mickey",
         start_url: "/",
-        background_color: "#ffffff",
-        theme_color: "#ffffff",
+        background_color: "#f1f0f5",
+        theme_color: "#f1f0f5",
         icon: `${__dirname}/src/images/icon.png`,
       },
     },
@@ -26,7 +32,8 @@ module.exports = {
       options: {
         name: "images",
         path: `${__dirname}/src/images/`
-      }
+      },
+      __key: "images"
     },
     {
       resolve: "gatsby-source-filesystem",
@@ -35,6 +42,14 @@ module.exports = {
         path: `${__dirname}/src/pages/`,
       },
       __key: "pages",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "blog",
+        path: `${__dirname}/src/blog/`,
+      },
+      __key: "blog",
     },
     {
       resolve: "gatsby-plugin-image"
@@ -53,6 +68,9 @@ module.exports = {
     {
       resolve: "gatsby-transformer-sharp"
     },
+    {
+      resolve: "gatsby-plugin-mdx"
+    }
     // {
     //   resolve: "gatsby-transformer-remark",
     //   options: {
