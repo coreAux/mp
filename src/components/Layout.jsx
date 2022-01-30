@@ -27,6 +27,8 @@ const Layout = ({ children, ...props }) => {
   const [darkmode, setDarkmode] = useState(false)
   const [contrastmode, setContrastmode] = useState(false)
   const [scrollY, setScrollY] = useState(0)
+  const scrollYRef = React.useRef()
+  scrollYRef.current = scrollY
 
   // console.log("props: ", props)
 
@@ -47,6 +49,16 @@ const Layout = ({ children, ...props }) => {
       document.documentElement.classList.toggle("contrastmode")
     }
   }
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      if (darkmode) {
+        document.querySelector("meta[name='theme-color']").setAttribute("content","#111015")
+      } else if (!darkmode) {
+        document.querySelector("meta[name='theme-color']").setAttribute("content","#f1f0f5")
+      }
+    }
+  }, [darkmode])
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -87,7 +99,7 @@ const Layout = ({ children, ...props }) => {
 
   const childrenWithProps = React.Children.map(children, child => {
     if (React.isValidElement(child)) {
-      return React.cloneElement(child, { darkmode, scrollY, ...props })
+      return React.cloneElement(child, { darkmode, scrollY, scrollYRef, ...props })
     }
     return child
   })

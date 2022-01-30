@@ -4,9 +4,11 @@ import { SafeArea, Emoji } from "../styles"
 
 import SEOComponent from "../components/SEOComponent"
 import Loadable from "@loadable/component"
-const Mickey = Loadable(() => import("../components/Mickey"))
+// const Mickey = Loadable(() => import("../components/Mickey"))
+// import MickeyTwo from "../components/MickeyTwo"
+const MickeyTwo = Loadable(() => import("../components/MickeyTwo"))
 
-const IndexPage = ({ scrollY, darkmode }) => {
+const IndexPage = ({ scrollY, scrollYRef, darkmode }) => {
   const [windowWidth, setWindowWidth] = React.useState(0)
   const [windowHeight, setWindowHeight] = React.useState(0)
 
@@ -44,10 +46,14 @@ const IndexPage = ({ scrollY, darkmode }) => {
             gridArea: "1 / 1 / auto / auto"
           }}
         >
-          <Mickey
+          {/*<Mickey
             windowWidth={windowWidth}
             windowHeight={windowHeight}
             scrollY={scrollY}
+            darkmode={darkmode}
+          />*/}
+          <MickeyTwo
+            scrollY={scrollYRef}
             darkmode={darkmode}
           />
         </div>

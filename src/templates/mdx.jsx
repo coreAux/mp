@@ -3,25 +3,34 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
 import { graphql, Link } from "gatsby"
 
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 import SEOComponent from "../components/SEOComponent"
 
-const BackButton = styled(Link)`
+const ButtonStyles = css`
   color: var(--white);
-  position: fixed;
-  top: calc(20px + 40px + 20px);
-  left: 20px;
+  position: sticky;
   background: var(--black);
   z-index: 55;
   border-radius: 9999px;
   padding: 4px 8px;
+  box-shadow: var(--shadow-elevation-high);
 
   @media (hover) {
     &:hover {
       background: var(--primary-color);
     }
   }
+`
+
+const BackButton = styled(Link)`
+  ${ButtonStyles}
+  top: calc(20px + 40px + 20px);
+`
+
+const NextPrevButtons = styled(Link)`
+  ${ButtonStyles}
+  bottom: calc(20px);
 `
 
 const MdxPage = ({
@@ -50,25 +59,36 @@ const MdxPage = ({
         title={title}
         description={excerpt}
       />
-
+      <div
+        style={{
+          maxWidth: "900px",
+          margin: "0 auto",
+        }}
+      >
       <BackButton to="/blog/">Back</BackButton>
       <h1>{title}</h1>
+
       <MDXProvider>
         <MDXRenderer
           title={title}
           excerpt={excerpt}
           localImages={embeddedImagesLocal}
         >
+
           {body}
+
         </MDXRenderer>
       </MDXProvider>
-      {previous && <Link to={`../${previous.slug}`}>
-        Previous: {previous.frontmatter.title}
-      </Link>}
 
-      {next && <Link to={`../${next.slug}`}>
+      {previous && <NextPrevButtons to={`../${previous.slug}`}>
+        Previous: {previous.frontmatter.title}
+      </NextPrevButtons>}
+
+      {next && <NextPrevButtons to={`../${next.slug}`}>
         Next: {next.frontmatter.title}
-      </Link>}
+      </NextPrevButtons>}
+
+      </div>
     </>
   )
 }

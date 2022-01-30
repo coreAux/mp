@@ -122,6 +122,7 @@ class Mickey extends React.Component {
     const myP5 = new p5(this.Sketch, this.p5Ref.current)
     myP5.windowWidth = this.props.windowWidth
     myP5.windowHeight = this.props.windowHeight
+    console.log("p5: ", p5)
   }
 
   componentWillUnmount() {

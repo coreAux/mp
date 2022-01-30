@@ -154,7 +154,7 @@ export const GlobalStyle = createGlobalStyle`
 
   #gatsby-focus-wrapper {
     width: 100vw;
-    overflow-x: hidden;
+    // overflow-x: hidden;
   }
 
   code {
