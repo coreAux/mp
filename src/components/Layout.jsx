@@ -37,7 +37,9 @@ const Layout = ({ children, ...props }) => {
       // Avoid anything happening when tabbing...
     } else {
       setDarkmode(!darkmode)
-      document.documentElement.classList.toggle("darkmode")
+      setTimeout(() => {
+        document.documentElement.classList.toggle("darkmode")
+      }, 300)
     }
   }
 

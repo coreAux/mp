@@ -124,11 +124,13 @@ const Modal = ({ scrollY }) => {
 
   useEffect(() => {
     if (typeof window !== undefined) {
-      if (!modalOpen) {
+      if (prevModalState.current && !modalOpen) {
         window.scroll(0, localScroll)
       }
+
+      prevModalState.current = modalOpen
     }
-  }, [modalOpen, localScroll])
+  }, [prevModalState, modalOpen, localScroll])
 
   return (
     <Transition

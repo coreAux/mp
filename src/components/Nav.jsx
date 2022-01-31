@@ -4,6 +4,8 @@ import { Transition } from "react-transition-group"
 import styled, { css } from "styled-components"
 import { smallBreakPoint, RoundButton } from "../styles"
 
+import ToggleDarkmode from "./ToggleDarkmode"
+
 const ButtonWrapper = styled.div`
   z-index: 55;
   position: fixed;
@@ -234,12 +236,10 @@ const Nav = ({ darkmode, toggleDarkmode, contrastmode, toggleContrastmode }) => 
                       <div style={{borderRadius:"9999px",width:"10px",height:"10px",background:`linear-gradient(${contrastmode ? "90deg" : "270deg"}, var(--white) 50%, var(--black) 50%)`,position:"absolute",top:"50%",left:"50%",transform:"translate3d(-50%,-50%,0)"}} />
                     </div>
                   </button>
-                  <button
-                    style={{background:"none",border:"none",cursor:"pointer",filter:`brightness(${darkmode ? "0" : "20"})`,fontSize:"24px"}}
+                  <ToggleDarkmode
                     onClick={toggleDarkmode}
-                  >
-                    {darkmode ? "☀️" : "🌙"}
-                  </button>
+                    darkmode={darkmode}
+                  />
                 </FlexDiv>
               </Menu>
           </NavWrapper>

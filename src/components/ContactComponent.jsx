@@ -12,6 +12,7 @@ const InputCSS = css`
   letter-spacing: var(--letter-spacing);
   border: none;
   border-bottom: 2px solid var(--black);
+  border-radius: 0;
   background: none;
   width: 100%;
   padding: 4px 8px;

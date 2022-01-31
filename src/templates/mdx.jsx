@@ -91,8 +91,8 @@ const MdxPage = ({
   }
 }) => {
 
-  console.log(next)
-  console.log(previous)
+  // console.log(next)
+  // console.log(previous)
 
   return (
     <>
