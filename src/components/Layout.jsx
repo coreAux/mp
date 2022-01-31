@@ -109,7 +109,9 @@ const Layout = ({ children, ...props }) => {
       <LayoutWrapper>
         <GlobalStyle />
 
-        <Modal />
+        <Modal
+          scrollY={scrollY}
+        />
 
         <Nav
           darkmode={darkmode}

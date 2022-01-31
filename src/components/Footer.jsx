@@ -11,7 +11,7 @@ import MickeyIcon from "../svgs/MickeyIcon"
 
 import ContactComponent from "./ContactComponent"
 
-const raster = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+const raster = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 
 const StyledFooter = styled.footer`
   position: sticky;
@@ -28,11 +28,11 @@ const StyledFooter = styled.footer`
   html.darkmode & {
     --circle-color: hsl(0deg, 0%, 4%);
   }
-
+  background-position: bottom center;
   background:
     ${raster.map((r, i) => (
       `radial-gradient(circle ${r * 2}px at 50% 50%, var(--circle-color) 98%, ${r % 2 === 0 ? "transparent 98%" : "transparent 98%"}) ${r % 2 === 0 ? "0" : (raster.length * 5 + 5) / 2}px ${(r * i) * 2}px/${raster.length * 5 + 5}px ${r * 4}px repeat-x${r === raster.length ? "" : ", "}`
-    ))}
+    ))};
 `
 
 /*

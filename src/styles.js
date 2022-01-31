@@ -95,6 +95,7 @@ export const GlobalStyle = createGlobalStyle`
     &.nav-open,
     &.modal-open {
       overflow: hidden;
+      position: fixed;
     }
   }
 
@@ -126,13 +127,50 @@ export const GlobalStyle = createGlobalStyle`
 
   h2 {
     font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     font-size: 24px;
   }
 
   main a {
-    color: var(--primary-color);
+    position: relative;
+    color: var(--black);
     text-decoration: none;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -3px;
+      border-radius: 9999px;
+      left: 0;
+      background-image: linear-gradient(90deg, var(--primary-color) 50%, transparent 50%);
+      background-position: 0% 100%;
+      background-repeat: repeat-x;
+      background-size: 200% 100%;
+      transition: none;
+    }
+
+    @media (hover) {
+      &:hover {
+        &::after {
+          background-position: 200% 100%;
+          transition: background-position .5s;
+        }
+      }
+    }
+
+    @media (hover: none) {
+      &:hover {
+        &::after {
+        background-size: 100% 100%;
+        }
+      }
+    }
+
+
+
+
 /*  background-image: linear-gradient(90deg, var(--primary-color), var(--primary-color));
     background-position: 0% 100%;
     background-repeat: no-repeat;

@@ -107,8 +107,20 @@ const BlogPage = ({ data }) => {
                     transform: `
                     ${state === "entered" ? "translate3d(0, 0, 0)" : ( state === "entering" ? "translate3d(-50%, 0, 0)" : ( state === "exiting" && "translate3d(50%, 0, 0)" ) )}
                     `,
-                    transition: "opacity 100ms, transform 100ms, height 200ms",
-                    willChange: "transform, opacity"
+                    // transition: "opacity 100ms, transform 100ms, height 200ms 100ms",
+                    transition: state !== "entered" ? "opacity 100ms, transform 100ms, height 200ms 100ms" : "opacity 100ms 200ms, transform 100ms 200ms, height 200ms",
+                    willChange: "transform, opacity, height",
+                    height: state === "entered" ? "75px" : "0px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+
+                    backgroundImage: "radial-gradient(circle 4px at 75% 25%, hsl(0deg, 0%, 4%) 98%, transparent 98%), radial-gradient(circle 8px at 25% 25%, hsl(0deg, 0%, 4%) 98%, transparent 98%), radial-gradient(circle 4px at 25% 75%, hsl(0deg, 0%, 4%) 98%, transparent 98%), radial-gradient(circle 8px at 75% 75%, hsl(0deg, 0%, 4%) 98%, var(--white) 98%)",
+                    backgroundSize: "40px 40px",
+                    borderRadius: "var(--border-radius)",
+                    boxShadow: "var(--shadow-elevation-medium)",
+                    backgroundPosition: "10px 10px",
                   }} key={p.id} >
                   <h2><Link to={`${p.slug}`}>
                     {p.frontmatter.title}

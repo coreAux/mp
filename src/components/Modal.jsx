@@ -92,15 +92,25 @@ const CloseButton = styled(RoundButton)`
   }
 `
 
-const Modal = () => {
+const Modal = ({ scrollY }) => {
   const { modalOpen, setModalOpen, modalComponent } = useContext(ModalContext)
+  const [localScroll, setLocalScroll] = React.useState(0)
+  const prevModalState = React.useRef(false)
+
+  useEffect(() => {
+    if (!modalOpen) {
+      setLocalScroll(scrollY)
+    }
+  }, [scrollY])
 
   useEffect(() => {
     if (typeof window !== undefined) {
       const handleResize = () => {
         if (modalOpen) {
+          document.body.style.top = `-${scrollY}px`
           document.body.classList.add("modal-open")
         } else if (!modalOpen) {
+          document.body.style.top = 0
           document.body.classList.remove("modal-open")
         }
       }
@@ -111,6 +121,14 @@ const Modal = () => {
       return () => window.removeEventListener("resize", handleResize)
     }
   }, [modalOpen])
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      if (!modalOpen) {
+        window.scroll(0, localScroll)
+      }
+    }
+  }, [modalOpen, localScroll])
 
   return (
     <Transition

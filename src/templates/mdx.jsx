@@ -21,6 +21,10 @@ const ButtonStyles = css`
       background: var(--primary-color);
     }
   }
+
+  &::after {
+    display: none;
+  }
 `
 
 const BackButton = styled(Link)`
@@ -28,9 +32,46 @@ const BackButton = styled(Link)`
   top: calc(20px + 40px + 20px);
 `
 
+const NextPrevWrapper = styled.div`
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
+const NextPrevButtonWrapper = styled.div`
+  max-width: 50%;
+  padding-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
+const SpanStyles = css`
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+`
+
+const NextSpan = styled.span`
+  ${SpanStyles}
+  width: 100%;
+  text-align: right;
+  display: inline-block;
+`
+
+const PrevSpan = styled.span`
+  ${SpanStyles}
+  width: 100%;
+  text-align: left;
+  display: inline-block;
+`
+
 const NextPrevButtons = styled(Link)`
-  ${ButtonStyles}
-  bottom: calc(20px);
+  display: block;
+  // ${ButtonStyles}
+  // bottom: calc(20px);
 `
 
 const MdxPage = ({
@@ -80,13 +121,20 @@ const MdxPage = ({
         </MDXRenderer>
       </MDXProvider>
 
-      {previous && <NextPrevButtons to={`../${previous.slug}`}>
-        Previous: {previous.frontmatter.title}
-      </NextPrevButtons>}
-
-      {next && <NextPrevButtons to={`../${next.slug}`}>
-        Next: {next.frontmatter.title}
-      </NextPrevButtons>}
+      <NextPrevWrapper>
+        <NextPrevButtonWrapper>
+          {previous && <NextPrevButtons to={`../${previous.slug}`}>
+            <PrevSpan>Previous</PrevSpan><br/>
+            {previous.frontmatter.title}
+          </NextPrevButtons>}
+        </NextPrevButtonWrapper>
+        <NextPrevButtonWrapper>
+          {next && <NextPrevButtons to={`../${next.slug}`}>
+            <NextSpan>Next</NextSpan><br/>
+            {next.frontmatter.title}
+          </NextPrevButtons>}
+        </NextPrevButtonWrapper>
+      </NextPrevWrapper>
 
       </div>
     </>

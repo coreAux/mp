@@ -9,8 +9,13 @@ import Loadable from "@loadable/component"
 const MickeyTwo = Loadable(() => import("../components/MickeyTwo"))
 
 const IndexPage = ({ scrollY, scrollYRef, darkmode }) => {
-  const [windowWidth, setWindowWidth] = React.useState(0)
-  const [windowHeight, setWindowHeight] = React.useState(0)
+  const [windowWidth, setWindowWidth] = React.useState(100)
+  const [windowHeight, setWindowHeight] = React.useState(100)
+  const windowWidthRef = React.useRef()
+  windowWidthRef.current = windowWidth
+  const windowHeightRef = React.useRef()
+  windowHeightRef.current = windowHeight
+
 
   React.useEffect(() => {
     if (typeof window !== undefined) {
@@ -53,6 +58,8 @@ const IndexPage = ({ scrollY, scrollYRef, darkmode }) => {
             darkmode={darkmode}
           />*/}
           <MickeyTwo
+            windowWidth={windowWidthRef}
+            windowHeight={windowHeightRef}
             scrollY={scrollYRef}
             darkmode={darkmode}
           />
