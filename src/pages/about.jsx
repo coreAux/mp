@@ -7,6 +7,7 @@ import { SafeArea } from "../styles"
 import SEOComponent from "../components/SEOComponent"
 
 const StyledGatsbyImage = styled(GatsbyImage)`
+  isolation: isolate;
   border-radius: 9999px;
 `
 

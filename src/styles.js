@@ -154,7 +154,7 @@ export const GlobalStyle = createGlobalStyle`
       left: 0;
       background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
       background-position: 200% 100%;
-      background-repeat: repeat-x;
+      background-repeat: no-repeat;
       background-size: 200% 100%;
       transition: none;
     }
@@ -169,7 +169,7 @@ export const GlobalStyle = createGlobalStyle`
       left: 0;
       background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
       background-position: 0% 100%;
-      background-repeat: repeat-x;
+      background-repeat: no-repeat;
       background-size: 200% 100%;
       transition: background-position .2s;
     }

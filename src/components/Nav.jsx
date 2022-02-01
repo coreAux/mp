@@ -79,6 +79,7 @@ const NavWrapper = styled.div`
     top: 0;
     width: 100vw;
     height: 100vh;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     left: 0;
     border-radius: 0;
     background: var(--white);
@@ -95,11 +96,33 @@ const Menu = styled.nav`
   padding: var(--padding);
 
   @media (max-width: ${smallBreakPoint}px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 `
 
-const FlexDiv = styled.div`
+const MenuWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  flex-grow: 1;
+
+  & > a,
+  & > h1 {
+    margin-right: 20px;
+  }
+
+  @media (max-width: ${smallBreakPoint}px) {
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    & > a,
+    & > h1 {
+      margin-right: 0px;
+    }
+  }
+`
+
+const ToggleWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: stretch;
@@ -110,7 +133,11 @@ const FlexDiv = styled.div`
   }
 
   @media (max-width: ${smallBreakPoint}px) {
-    flex-direction: column;
+
+    & > a,
+    & > h1 {
+      margin-right: 0px;
+    }
   }
 `
 
@@ -135,7 +162,7 @@ const StyledLink = styled(Link)`
     left: 0;
     background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
     background-position: 200% 100%;
-    background-repeat: repeat-x;
+    background-repeat: no-repeat;
     background-size: 200% 100%;
     transition: none;
   }
@@ -150,7 +177,7 @@ const StyledLink = styled(Link)`
     left: 0;
     background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
     background-position: 0% 100%;
-    background-repeat: repeat-x;
+    background-repeat: no-repeat;
     background-size: 200% 100%;
     transition: background-position .2s;
   }
@@ -173,6 +200,59 @@ const StyledLink = styled(Link)`
   @media (hover: none) {
     &:active {
       background-color: hsl(var(--primary-color) / .2);
+    }
+  }
+
+  &.active {
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -1px;
+      border-radius: 9999px;
+      left: 0;
+      background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
+      background-position: 100% 100%;
+      background-repeat: no-repeat;
+      background-size: 200% 100%;
+      transition: none;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -1px;
+      border-radius: 9999px;
+      left: 0;
+      background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
+      background-position: 100% 100%;
+      background-repeat: no-repeat;
+      background-size: 200% 100%;
+      transition: background-position .2s;
+    }
+
+    @media (hover) {
+      &:hover {
+        &::after {
+          background-position: 0% 100%;
+          transition: background-position .2s;
+        }
+
+        &::before {
+          background-image: linear-gradient(90deg, var(--primary-color) 50%, transparent 50%);
+          background-position: 0% 100%;
+          transition: background-position .2s .2s;
+        }
+      }
+    }
+  }
+
+  @media (max-width: ${smallBreakPoint}px) {
+    &.active {
+      color: var(--primary-color);
     }
   }
 `
@@ -242,7 +322,7 @@ const Nav = ({ darkmode, toggleDarkmode, contrastmode, toggleContrastmode }) => 
             $state={state}
           >
               <Menu>
-                <FlexDiv>
+                <MenuWrapper>
                   <H1 onClick={() => {
                       navigate("/")
                       toggleNavOnSmallDevice()
@@ -260,8 +340,8 @@ const Nav = ({ darkmode, toggleDarkmode, contrastmode, toggleContrastmode }) => 
                   <StyledLink to="/blog/" activeClassName="active" partiallyActive={true} onClick={toggleNavOnSmallDevice}>
                     Blog
                   </StyledLink>
-                </FlexDiv>
-                <FlexDiv>
+                </MenuWrapper>
+                <ToggleWrapper>
                   <ToggleContrast
                     onClick={toggleContrastmode}
                     contrastmode={contrastmode}
@@ -270,7 +350,7 @@ const Nav = ({ darkmode, toggleDarkmode, contrastmode, toggleContrastmode }) => 
                     onClick={toggleDarkmode}
                     darkmode={darkmode}
                   />
-                </FlexDiv>
+              </ToggleWrapper>
               </Menu>
           </NavWrapper>
         )}

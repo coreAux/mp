@@ -28,6 +28,7 @@ const ContentWrapper = styled.div`
 `
 
 const StyledGatsbyImage = styled(GatsbyImage)`
+  isolation: isolate;
   border-radius: 9999px;
   filter: brightness(1.25);
 `
