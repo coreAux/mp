@@ -1,10 +1,11 @@
 import React from "react"
 import { Transition } from "react-transition-group"
 import styled from "styled-components"
-import { smallBreakPoint } from "../styles"
+import { smallBreakPoint } from "../styles"
 
 const ToggleWrapper = styled.button`
   background: transparent;
+  position: relative;
   padding: 0;
   cursor: pointer;
   border: none;
@@ -61,10 +62,40 @@ const Moon = styled.div`
   }
 `
 
+const InfoHolder = styled.div`
+  cursor: default;
+  position: absolute;
+  font-size: 12px;
+  text-transform: uppercase;
+  border-radius: var(--border-radius);
+  color: var(--white);
+  background: hsl(var(--black-hsl) / .7);
+  width: 110px;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+
+  button:hover > &:not(:hover) {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .3s 1s;
+  }
+`
+
 const ToggleDarkmode = ({ darkmode, ...props }) => {
 
   return (
-    <ToggleWrapper {...props} >
+    <ToggleWrapper
+      aria-label="Toggle darkmode"
+      {...props}
+    >
       <Transition
         in={darkmode}
         unmountOnExit
@@ -100,6 +131,11 @@ const ToggleDarkmode = ({ darkmode, ...props }) => {
           />
         )}
       </Transition>
+
+      <InfoHolder>
+        Darkmode: {darkmode ? "on" : "off"}
+      </InfoHolder>
+
     </ToggleWrapper>
   )
 }

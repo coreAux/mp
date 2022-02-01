@@ -32,10 +32,10 @@ const BlogPage = ({ data }) => {
   return (
     <StyledSafeArea>
       <SEOComponent
-        title="About"
+        title="Blog"
         description="MaMickster..."
       />
-      <h1>Blörg</h1>
+      <h1>Blog</h1>
       <div
         style={{
           position: "sticky",
@@ -110,13 +110,14 @@ const BlogPage = ({ data }) => {
                     // transition: "opacity 100ms, transform 100ms, height 200ms 100ms",
                     transition: state !== "entered" ? "opacity 100ms, transform 100ms, height 200ms 100ms" : "opacity 100ms 200ms, transform 100ms 200ms, height 200ms",
                     willChange: "transform, opacity, height",
-                    height: state === "entered" ? "75px" : "0px",
+                    height: state === "entered" ? "100px" : "0px",
+                    padding: "10px",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
 
-                    backgroundImage: "radial-gradient(circle 4px at 75% 25%, hsl(0deg, 0%, 4%) 98%, transparent 98%), radial-gradient(circle 8px at 25% 25%, hsl(0deg, 0%, 4%) 98%, transparent 98%), radial-gradient(circle 4px at 25% 75%, hsl(0deg, 0%, 4%) 98%, transparent 98%), radial-gradient(circle 8px at 75% 75%, hsl(0deg, 0%, 4%) 98%, var(--white) 98%)",
+                    backgroundImage: "radial-gradient(circle 4px at 75% 25%, var(--circle-color) 98%, transparent 98%), radial-gradient(circle 8px at 25% 25%, var(--circle-color) 98%, transparent 98%), radial-gradient(circle 4px at 25% 75%, var(--circle-color) 98%, transparent 98%), radial-gradient(circle 8px at 75% 75%, var(--circle-color) 98%, var(--white) 98%)",
                     backgroundSize: "40px 40px",
                     borderRadius: "var(--border-radius)",
                     boxShadow: "var(--shadow-elevation-medium)",
@@ -126,6 +127,7 @@ const BlogPage = ({ data }) => {
                     {p.frontmatter.title}
                   </Link></h2>
                   <p>{p.frontmatter.date} - {p.timeToRead} min read</p>
+                  <p>{p.frontmatter.description}</p>
                 </div>
               </>
             )}
@@ -155,6 +157,7 @@ query blog_page_query {
         slug
         frontmatter {
           title
+          description
           date(formatString: "MMMM DD, YYYY")
           category
         }

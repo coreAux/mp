@@ -21,13 +21,9 @@ const StyledFooter = styled.footer`
   top: 100%;
   margin: 50px 0 0 0;
   padding: 20px calc(20px + env(safe-area-inset-right)) 20px calc(20px + env(safe-area-inset-left));
+  min-height: 30vh;
   height: 30vh;
 
-  --circle-color: hsl(0deg, 0%, 98%);
-
-  html.darkmode & {
-    --circle-color: hsl(0deg, 0%, 4%);
-  }
   background-position: bottom center;
   background:
     ${raster.map((r, i) => (
@@ -129,16 +125,16 @@ const Footer = () => {
               transform: "translate3d(-10px, 0, 0)"
             }}
           >
-            <IconLink href="https://www.twitter.com/hejmikael" target="_blank" rel="noreferrer">
+            <IconLink href="https://www.twitter.com/hejmikael" target="_blank" rel="noreferrer" aria-label="Link to Twitter">
               <StyledTwitterIcon />
             </IconLink>
-            <IconLink href="https://www.github.com/coreAux" target="_blank" rel="noreferrer">
+            <IconLink href="https://www=.github.com/coreAux" target="_blank" rel="noreferrer" aria-label="Link to GitHub">
               <StyledGitHubIcon />
             </IconLink>
-            <IconLink href="https://www.instagram.com/hejmikael" target="_blank" rel="noreferrer">
+            <IconLink href="https://www.instagram.com/hejmikael" target="_blank" rel="noreferrer" aria-label="Link to Instagram">
               <StyledInstagramIcon />
             </IconLink>
-            <IconLink href="https://www.linkedin.com/in/petersenmikael" target="_blank" rel="noreferrer">
+            <IconLink href="https://www.linkedin.com/in/petersenmikael" target="_blank" rel="noreferrer" aria-label="Link to LinkedIn">
               <StyledLinkedInIcon />
             </IconLink>
           </div>
@@ -188,7 +184,7 @@ const Footer = () => {
               setModalOpen(true)
             }}
           >
-            Contact Mickey
+            Contact
           </Button>
         </div>
       </StyledFooter>

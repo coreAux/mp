@@ -3,18 +3,20 @@ import React from "react"
 import { SafeArea, Emoji } from "../styles"
 
 import SEOComponent from "../components/SEOComponent"
-import Loadable from "@loadable/component"
-// const Mickey = Loadable(() => import("../components/Mickey"))
-// import MickeyTwo from "../components/MickeyTwo"
-const MickeyTwo = Loadable(() => import("../components/MickeyTwo"))
+import Hero from "../components/Hero"
 
-const IndexPage = ({ scrollY, scrollYRef, darkmode }) => {
+const testArr = [0,1,2,3,4,5,6,7,8,9,10]
+
+const IndexPage = ({ scrollYRef, darkmode }) => {
   const [windowWidth, setWindowWidth] = React.useState(100)
   const [windowHeight, setWindowHeight] = React.useState(100)
   const windowWidthRef = React.useRef()
   windowWidthRef.current = windowWidth
   const windowHeightRef = React.useRef()
   windowHeightRef.current = windowHeight
+
+
+  const [splice, setSplice] = React.useState(2)
 
 
   React.useEffect(() => {
@@ -37,47 +39,12 @@ const IndexPage = ({ scrollY, scrollYRef, darkmode }) => {
         title="Mickey"
         description="MaMickster..."
       />
-      <div
-        style={{
-          display: "grid",
-          placeItems: "center",
-          overflow: "hidden"
-        }}
-      >
-
-        <div
-          style={{
-            height: "75vh",
-            gridArea: "1 / 1 / auto / auto"
-          }}
-        >
-          {/*<Mickey
-            windowWidth={windowWidth}
-            windowHeight={windowHeight}
-            scrollY={scrollY}
-            darkmode={darkmode}
-          />*/}
-          <MickeyTwo
-            windowWidth={windowWidthRef}
-            windowHeight={windowHeightRef}
-            scrollY={scrollYRef}
-            darkmode={darkmode}
-          />
-        </div>
-
-        <div
-          style={{
-            height: "75vh",
-            zIndex: 2,
-            gridArea: "1 / 1 / auto / auto"
-          }}
-        >
-          <h1>
-            Bruh
-          </h1>
-        </div>
-
-      </div>
+      <Hero
+        windowWidthRef={windowWidthRef}
+        windowHeightRef={windowHeightRef}
+        darkmode={darkmode}
+        scrollYRef={scrollYRef}
+      />
       <SafeArea>
         <h1>Mickey / Header 1</h1>
         <p>
@@ -92,6 +59,18 @@ const IndexPage = ({ scrollY, scrollYRef, darkmode }) => {
         <h1>Principles / Beliefs / Values</h1>
         <h2>{"Style, function, personality"}</h2>
         <p>I love creating unique and personal websites, just like back in the &rsquo;90s</p>
+        <h2>Devil is in the details</h2>
+        <p>The importance of details can&apos;t be underestimated, with a keen eye for detail I make sure that your product delivers on all fronts.</p>
+      </SafeArea>
+      <SafeArea>
+        {testArr.slice(0,splice).map((t) => (
+          <p key={t}>{t}</p>
+        ))}
+        <button
+          onClick={() => setSplice(splice => splice + 1)}
+        >
+          Show more!
+        </button>
       </SafeArea>
     </>
   )

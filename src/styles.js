@@ -39,6 +39,7 @@ export const GlobalStyle = createGlobalStyle`
     --letter-spacing: 0px;
     --letter-spacing-inverted: .5px;
     --shadow-color: 252deg 7% 60%;
+    --circle-color: hsl(0deg, 0%, 98%);
     color-scheme: light;
 
     &.contrastmode {
@@ -53,7 +54,9 @@ export const GlobalStyle = createGlobalStyle`
       --black-hsl: 252deg 20% 95%;
       --letter-spacing: .5px;
       --letter-spacing-inverted: 0px;
-      --shadow-color: 253deg 7% 9%;
+      // --shadow-color: 253deg 0% 0%;
+      --shadow-color: 0deg 0% 0%;
+      --circle-color: hsl(0deg, 0%, 4%);
       color-scheme: dark;
 
       &.contrastmode {
@@ -73,8 +76,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   *::selection {
-    background-color: hsl(var(--primary-color-hsl) / .2);
-    color: white;
+    background-color: hsl(var(--primary-color-hsl) / .5);
+    color: hsl(var(--black-hsl) / .8);
   }
 
   html, body {
@@ -183,7 +186,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   p + p {
-    margin-top: 8px;
+    margin-top: 16px;
   }
 
   #root, #___gatsby {
@@ -202,8 +205,8 @@ export const GlobalStyle = createGlobalStyle`
 `
 
 export const SafeArea = styled.div`
-  padding-right: calc(20px + env(safe-area-inset-right));
-  padding-left: calc(20px + env(safe-area-inset-left));
+  padding-right: calc(40px + env(safe-area-inset-right));
+  padding-left: calc(40px + env(safe-area-inset-left));
 `
 
 export const Button = styled.button`

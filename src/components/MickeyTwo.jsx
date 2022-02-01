@@ -1,11 +1,22 @@
-import React from "react"
+import React, { useState, useRef, useEffect, memo } from "react"
 import RobotoBlack from "../fonts/Roboto-Black.ttf"
 import p5 from "p5"
 
 const MickeyTwo = ({ windowWidth, windowHeight, darkmode, scrollY }) => {
-  const mountRef = React.useRef()
+  const [localDarkmode, setLocalDarkmode] = useState(false)
+  const mountRef = useRef()
 
-  React.useEffect(() => {
+  useEffect(() => {
+    setLocalDarkmode(darkmode)
+  }, [])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLocalDarkmode(darkmode)
+    }, 300)
+  }, [darkmode])
+
+  useEffect(() => {
     if (mountRef.current) {
       const sketch = new p5((p) => {
         let font
@@ -26,8 +37,10 @@ const MickeyTwo = ({ windowWidth, windowHeight, darkmode, scrollY }) => {
           graphicTwo = p.createGraphics(windowWidth.current, windowHeight.current)
 
 
-          graphic.fill("#f1f0f5")
-          graphicTwo.fill("#111015")
+          graphic.fill("#000")
+          /* #f1f0f5 */
+          graphicTwo.fill("#fff")
+          /* 111015 */
           graphic.textFont(font)
           graphicTwo.textFont(font)
 
@@ -81,7 +94,7 @@ const MickeyTwo = ({ windowWidth, windowHeight, darkmode, scrollY }) => {
             const dw = windowWidth.current
             const dh = tileSize
 
-            if (darkmode) {
+            if (localDarkmode) {
               p.image(graphic, dx, dy, dw, dh, sx, sy, sw, sh)
             } else {
               p.image(graphicTwo, dx, dy, dw, dh, sx, sy, sw, sh)
@@ -148,12 +161,14 @@ const MickeyTwo = ({ windowWidth, windowHeight, darkmode, scrollY }) => {
         sketch.remove()
       }
     }
-  }, [darkmode])
+  }, [localDarkmode])
 
 
   return (
-    <div ref={mountRef} />
+    <>
+      <div ref={mountRef} />
+    </>
   )
 }
 
-export default React.memo(MickeyTwo)
+export default memo(MickeyTwo)

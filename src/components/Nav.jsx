@@ -5,6 +5,7 @@ import styled, { css } from "styled-components"
 import { smallBreakPoint, RoundButton } from "../styles"
 
 import ToggleDarkmode from "./ToggleDarkmode"
+import ToggleContrast from "./ToggleContrast"
 
 const ButtonWrapper = styled.div`
   z-index: 55;
@@ -224,18 +225,14 @@ const Nav = ({ darkmode, toggleDarkmode, contrastmode, toggleContrastmode }) => 
                     Work
                   </StyledLink>
                   <StyledLink to="/blog/" activeClassName="active" partiallyActive={true} onClick={toggleNavOnSmallDevice}>
-                    Insights / Blörg
+                    Blog
                   </StyledLink>
                 </FlexDiv>
                 <FlexDiv>
-                  <button
-                    style={{background:"none",border:"none",cursor:"pointer",fontSize:"24px"}}
+                  <ToggleContrast
                     onClick={toggleContrastmode}
-                  >
-                    <div style={{borderRadius:"9999px",width:"20px",height:"20px",background:`linear-gradient(${contrastmode ? "270deg" : "90deg"}, var(--white) 50%, var(--black) 50%)`,position:"relative"}}>
-                      <div style={{borderRadius:"9999px",width:"10px",height:"10px",background:`linear-gradient(${contrastmode ? "90deg" : "270deg"}, var(--white) 50%, var(--black) 50%)`,position:"absolute",top:"50%",left:"50%",transform:"translate3d(-50%,-50%,0)"}} />
-                    </div>
-                  </button>
+                    contrastmode={contrastmode}
+                  />
                   <ToggleDarkmode
                     onClick={toggleDarkmode}
                     darkmode={darkmode}
@@ -248,6 +245,7 @@ const Nav = ({ darkmode, toggleDarkmode, contrastmode, toggleContrastmode }) => 
 
       <ButtonWrapper>
         <Button
+          aria-label="Toggle navigation menu"
           $openNav={openNav}
           onClick={() => setOpenNav(!openNav)}
         >
