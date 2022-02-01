@@ -120,27 +120,60 @@ const H1 = styled.h1`
 `
 
 const StyledLink = styled(Link)`
-  color: inherit;
+  position: relative;
   text-transform: uppercase;
+  color: inherit;
   text-decoration: none;
-  background-image: linear-gradient(90deg, var(--primary-color), var(--primary-color));
-  background-position: 0% 100%;
-  background-repeat: no-repeat;
-  background-size: 0% 2px;
-  transition: background-size .2s;
 
-  &.active {
-    background-size: 100% 2px;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -1px;
+    border-radius: 9999px;
+    left: 0;
+    background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
+    background-position: 200% 100%;
+    background-repeat: repeat-x;
+    background-size: 200% 100%;
+    transition: none;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -1px;
+    border-radius: 9999px;
+    left: 0;
+    background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
+    background-position: 0% 100%;
+    background-repeat: repeat-x;
+    background-size: 200% 100%;
+    transition: background-position .2s;
   }
 
   @media (hover) {
     &:hover {
-      background-size: 100% 2px;
+      &::after {
+        background-position: 100% 100%;
+        transition: background-position .2s;
+      }
+
+      &::before {
+        background-image: linear-gradient(90deg, transparent 50%, transparent 50%);
+        background-position: 100% 100%;
+        transition: none;
+      }
     }
   }
 
-  @media (max-width: ${smallBreakPoint}px) {
-    background-image: linear-gradient(0deg, var(--primary-color), var(--primary-color));
+  @media (hover: none) {
+    &:active {
+      background-color: hsl(var(--primary-color) / .2);
+    }
   }
 `
 

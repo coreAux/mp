@@ -3,6 +3,11 @@ import styled, { createGlobalStyle } from "styled-components"
 export const smallBreakPoint = "700"
 
 export const GlobalStyle = createGlobalStyle`
+  @keyframes rotate_clockwise {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
   :root {
     /* SHARED VARS */
     --color-alpha: 1;
@@ -136,7 +141,7 @@ export const GlobalStyle = createGlobalStyle`
 
   main a {
     position: relative;
-    color: var(--black);
+    color: var(--primary-color);
     text-decoration: none;
 
     &::after {
@@ -147,42 +152,48 @@ export const GlobalStyle = createGlobalStyle`
       bottom: -3px;
       border-radius: 9999px;
       left: 0;
-      background-image: linear-gradient(90deg, var(--primary-color) 50%, transparent 50%);
-      background-position: 0% 100%;
+      background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
+      background-position: 200% 100%;
       background-repeat: repeat-x;
       background-size: 200% 100%;
       transition: none;
     }
 
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -3px;
+      border-radius: 9999px;
+      left: 0;
+      background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
+      background-position: 0% 100%;
+      background-repeat: repeat-x;
+      background-size: 200% 100%;
+      transition: background-position .2s;
+    }
+
     @media (hover) {
       &:hover {
         &::after {
-          background-position: 200% 100%;
-          transition: background-position .5s;
+          background-position: 100% 100%;
+          transition: background-position .2s;
+        }
+
+        &::before {
+          background-image: linear-gradient(90deg, transparent 50%, transparent 50%);
+          background-position: 100% 100%;
+          transition: none;
         }
       }
     }
 
     @media (hover: none) {
-      &:hover {
-        &::after {
-        background-size: 100% 100%;
-        }
+      &:active {
+        background-color: hsl(var(--primary-color) / .2);
       }
     }
-
-
-
-
-/*  background-image: linear-gradient(90deg, var(--primary-color), var(--primary-color));
-    background-position: 0% 100%;
-    background-repeat: no-repeat;
-    background-size: 100% 1px;
-    transition: background-size .1s;
-
-    &:hover {
-      background-size: 100% 100%;
-    }*/
   }
 
   p + p {

@@ -36,7 +36,7 @@ const Hero = ({ windowWidthRef, windowHeightRef, scrollYRef, darkmode }) => {
   const data = useStaticQuery(graphql`
     query hero_image {
       imageSharp(original: {src: {regex: "/mickey_hero/"}}) {
-        gatsbyImageData(placeholder: BLURRED, width: 400, transformOptions: {duotone: {highlight: "#ffffff", shadow: "#000000"}})
+        gatsbyImageData(quality: 100, placeholder: BLURRED, width: 400, transformOptions: {duotone: {highlight: "#ffffff", shadow: "#000000"}})
       }
     }
   `)
@@ -73,7 +73,7 @@ const Hero = ({ windowWidthRef, windowHeightRef, scrollYRef, darkmode }) => {
         <div style={{gridArea: "1 / auto / auto / span 6", justifySelf: "center", display: "grid", placeItems: "center"}}>
           <StyledGatsbyImage style={{margin: "2.2vw",gridArea: "1 / 1 / auto / auto"}} image={image} alt="Mickey" />
 
-            <svg id="test" style={{ width: "auto", height: "auto", gridArea: "1 / 1 / auto / auto", fontFamily: "Roboto, sans-serif", textTransform: "uppercase", zIndex: "2", fill: "var(--black)" }} viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
+            <svg id="test" style={{ width: "auto", height: "auto", gridArea: "1 / 1 / auto / auto", fontFamily: "Roboto, sans-serif", textTransform: "uppercase", zIndex: "2", fill: "var(--black)", animation: "rotate_clockwise infinite linear 120s" }} viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <clipPath id="clipPath">
                 <path id="MyPath" d="M15,170
@@ -82,7 +82,7 @@ const Hero = ({ windowWidthRef, windowHeightRef, scrollYRef, darkmode }) => {
                 </clipPath>
               </defs>
               <text>
-                <textPath href="#MyPath" side="left" textLength="970">Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — </textPath>
+                <textPath href="#MyPath" side="left" textLength="974">Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — </textPath>
               </text>
             </svg>
 

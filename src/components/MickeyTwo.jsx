@@ -157,7 +157,7 @@ const MickeyTwo = ({ windowWidth, windowHeight, darkmode, scrollY }) => {
       }, mountRef.current)
 
       return () => {
-        console.log("Removing...")
+        // console.log("Removing...")
         sketch.remove()
       }
     }

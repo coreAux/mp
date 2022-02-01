@@ -11,7 +11,8 @@ const StyledSafeArea = styled(SafeArea)`
   background-size: 20px 20px;
   padding-top: 100px;
   padding-bottom: 100px;
-  background-image: linear-gradient(90deg, transparent 1px, var(--white) 1px 19px, transparent 19px), linear-gradient(0deg, #555 1px, var(--white) 1px 19px, #555 10px);
+  // background-image: linear-gradient(90deg, transparent 1px, var(--white) 1px 19px, transparent 19px), linear-gradient(0deg, #555 1px, var(--white) 1px 19px, #555 10px);
+  background: radial-gradient(circle 1px at 50% 50%, hsl(var(--black-hsl) / .2) 98%, transparent 98%) 0px 0px / 16px 16px;
 `
 
 const BlogPage = ({ data }) => {
@@ -149,22 +150,22 @@ const BlogPage = ({ data }) => {
 export default BlogPage
 
 export const pageQuery = graphql`
-query blog_page_query {
-  allMdx {
-    edges {
-      node {
-        timeToRead
-        slug
-        frontmatter {
-          title
-          description
-          date(formatString: "MMMM DD, YYYY")
-          category
+  query {
+    allMdx {
+      edges {
+        node {
+          timeToRead
+          slug
+          frontmatter {
+            title
+            description
+            date(formatString: "MMMM DD, YYYY")
+            category
+          }
+          excerpt(pruneLength: 150)
+          id
         }
-        excerpt(pruneLength: 150)
-        id
       }
     }
   }
-}
 `

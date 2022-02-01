@@ -1,11 +1,17 @@
 import React from "react"
-// import styled from "styled-components"
+import { graphql } from "gatsby"
+import { getImage, GatsbyImage } from "gatsby-plugin-image"
+import styled from "styled-components"
 import { SafeArea } from "../styles"
 
 import SEOComponent from "../components/SEOComponent"
 
+const StyledGatsbyImage = styled(GatsbyImage)`
+  border-radius: 9999px;
+`
 
-const AboutPage = () => {
+const AboutPage = ({ data }) => {
+  const image = getImage(data.imageSharp.gatsbyImageData)
 
   return (
     <>
@@ -15,6 +21,10 @@ const AboutPage = () => {
       />
       <SafeArea>
         <h1>About</h1>
+        <StyledGatsbyImage
+          image={image}
+          alt="Mickey"
+        />
         <p><a href="https://www.twitter.com/hejmikael" target="_blank" rel="noreferrer">Twitter</a></p>
         <p>
           Hi! My name is Mickey and I enjoy making interactive and colorful websites <span role="img" aria-label="Laptop">💻</span>.
@@ -33,3 +43,15 @@ const AboutPage = () => {
 }
 
 export default AboutPage
+
+export const pageQuery = graphql`
+  query {
+    imageSharp(original: {src: {regex: "/mickey_about/"}}) {
+      gatsbyImageData(aspectRatio: 1, placeholder: BLURRED, width: 400, quality: 100)
+    }
+  }
+`
+
+/*
+  transformOptions: {duotone: {highlight: "#64FFD0", shadow: "#000000"}}
+*/
