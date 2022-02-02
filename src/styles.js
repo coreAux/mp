@@ -131,6 +131,10 @@ export const GlobalStyle = createGlobalStyle`
     text-transform: uppercase;
     font-size: 64px;
     line-height: 1;
+
+    @media (max-width: ${smallBreakPoint}px) {
+      font-size: 32px;
+    }
   }
 
   h2 {
@@ -260,4 +264,22 @@ export const RoundButton = styled.button`
 
 export const Emoji = styled.span`
   ${({$size}) => `font-size: ${$size};`}
+`
+
+export const Kard = styled.div`
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-columns: 1fr;
+  grid-auto-flow: row;
+  gap: 32px;
+  align-items: center;
+`
+
+export const Borre = styled.div`
+  grid-area: auto / auto / auto / span ${({$mdSpan}) => $mdSpan || "6"};
+
+  @media (max-width: ${smallBreakPoint}px) {
+    ${({ $smOrder }) => "order: " + $smOrder + ";"}
+    grid-area: auto / auto / auto / span ${({$smSpan}) => $smSpan || "12"};
+  }
 `

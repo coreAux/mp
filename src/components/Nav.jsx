@@ -264,7 +264,7 @@ const Nav = ({ darkmode, toggleDarkmode, contrastmode, toggleContrastmode }) => 
   useEffect(() => {
     if (typeof window !== undefined) {
       const handleResize = () => {
-        if (window.innerWidth < smallBreakPoint) {
+        if (window.innerWidth <= smallBreakPoint) {
           if (openNav) {
             document.body.classList.add("nav-open")
           } else if (!openNav) {
@@ -286,7 +286,7 @@ const Nav = ({ darkmode, toggleDarkmode, contrastmode, toggleContrastmode }) => 
   useEffect(() => {
     const handleResize = () => {
       if (typeof window !== undefined) {
-        if (window.innerWidth < smallBreakPoint) {
+        if (window.innerWidth <= smallBreakPoint) {
           setOpenNav(false)
         } else if (window.innerWidth > smallBreakPoint) {
           setOpenNav(true)

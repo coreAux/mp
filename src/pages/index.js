@@ -1,6 +1,6 @@
 import React from "react"
 
-import { SafeArea, Emoji } from "../styles"
+import { SafeArea, Emoji, Kard, Borre } from "../styles"
 
 import SEOComponent from "../components/SEOComponent"
 import Hero from "../components/Hero"
@@ -56,11 +56,30 @@ const IndexPage = ({ scrollYRef, darkmode }) => {
         </p>
       </SafeArea>
       <SafeArea>
-        <h1>Principles / Beliefs / Values</h1>
-        <h2>{"Style, function, personality"}</h2>
-        <p>I love creating unique and personal websites, just like back in the &rsquo;90s</p>
-        <h2>Devil is in the details</h2>
-        <p>The importance of details can&apos;t be underestimated, with a keen eye for detail I make sure that your product delivers on all fronts.</p>
+        <Kard>
+          <Borre $mdSpan={4} >
+            <h1>Principles / Beliefs / Values</h1>
+          </Borre>
+          <Borre $mdSpan={4} >
+            <h2>{"Style, function, personality"}</h2>
+            <p>I love creating unique and personal websites, just like back in the &rsquo;90s</p>
+          </Borre>
+          <Borre $mdSpan={4} >
+            <h2>Devil is in the details</h2>
+            <p>The importance of details can&apos;t be underestimated, with a keen eye for detail I make sure that your product delivers on all fronts.</p>
+          </Borre>
+          <Borre $mdSpan={4} >
+            {/*<h1>Principles / Beliefs / Values</h1>*/}
+          </Borre>
+          <Borre $mdSpan={4} >
+            <h2>{"Style, function, personality"}</h2>
+            <p>I love creating unique and personal websites, just like back in the &rsquo;90s</p>
+          </Borre>
+          <Borre $mdSpan={4} >
+            <h2>Devil is in the details</h2>
+            <p>The importance of details can&apos;t be underestimated, with a keen eye for detail I make sure that your product delivers on all fronts.</p>
+          </Borre>
+        </Kard>
       </SafeArea>
       <SafeArea>
         {testArr.slice(0,splice).map((t) => (

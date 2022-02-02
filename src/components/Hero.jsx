@@ -2,7 +2,7 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { getImage, GatsbyImage } from "gatsby-plugin-image"
 import styled from "styled-components"
-import { SafeArea } from "../styles"
+import { SafeArea, Kard, Borre } from "../styles"
 
 import Loadable from "@loadable/component"
 const MickeyTwo = Loadable(() => import("../components/MickeyTwo"))
@@ -14,17 +14,13 @@ const Wrapper = styled.section`
 `
 
 const ContentWrapper = styled.div`
-  height: 75vh;
+  min-height: 75vh;
   width: 100%;
   z-index: 2;
   grid-area: 1 / 1 / auto / auto;
 
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-columns: 1fr;
-  grid-auto-flow: row;
-  gap: 32px;
-  align-items: center;
+  place-items: center;
 `
 
 const StyledGatsbyImage = styled(GatsbyImage)`
@@ -63,16 +59,27 @@ const Hero = ({ windowWidthRef, windowHeightRef, scrollYRef, darkmode }) => {
       </div>
 
       <ContentWrapper>
-        <div style={{gridArea: "1 / auto / auto / span 6"}}>
+        <Kard>
+        <Borre $mdSpan={6} $smSpan={12} $smallOrder={2}>
           <h1>
             Better web, more spiders.
           </h1>
           <p>
             Creating the essence of the spider, web and other funky components. What is not in the web may not exists without a pattern.
           </p>
-        </div>
-        <div style={{gridArea: "1 / auto / auto / span 6", justifySelf: "center", display: "grid", placeItems: "center"}}>
-          <StyledGatsbyImage style={{margin: "2.2vw",gridArea: "1 / 1 / auto / auto"}} image={image} alt="Mickey" />
+        </Borre>
+        <Borre
+          $mdSpan={6}
+          $smSpan={12}
+          $smallOrder={1}
+          style={{
+            justifySelf: "center",
+            display: "grid",
+            placeItems: "center"
+          }}
+
+        >
+          <StyledGatsbyImage style={{margin: "24px",gridArea: "1 / 1 / auto / auto"}} image={image} alt="Mickey" />
 
             <svg id="test" style={{ width: "auto", height: "auto", gridArea: "1 / 1 / auto / auto", fontFamily: "Roboto, sans-serif", textTransform: "uppercase", zIndex: "2", fill: "var(--black)", animation: "rotate_clockwise infinite linear 120s" }} viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -87,7 +94,8 @@ const Hero = ({ windowWidthRef, windowHeightRef, scrollYRef, darkmode }) => {
               </text>
             </svg>
 
-        </div>
+        </Borre>
+      </Kard>
       </ContentWrapper>
 
 

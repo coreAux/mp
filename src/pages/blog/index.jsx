@@ -3,7 +3,7 @@ import { graphql, Link } from "gatsby"
 
 import { TransitionGroup, Transition } from "react-transition-group"
 import styled from "styled-components"
-import { SafeArea } from "../../styles"
+import { SafeArea, Kard, Borre } from "../../styles"
 
 import SEOComponent from "../../components/SEOComponent"
 
@@ -31,14 +31,19 @@ const BlogPage = ({ data }) => {
   }, [filter])
 
   return (
+    <>
+    <SEOComponent
+      title="Blog"
+      description="MaMickster..."
+    />
     <StyledSafeArea>
-      <SEOComponent
-        title="Blog"
-        description="MaMickster..."
-      />
       <h1>Blog</h1>
-      <div
+      <Kard>
+      <Borre
+        $mdSpan={2}
+        $smSpan={12}
         style={{
+          zIndex: 2,
           position: "sticky",
           top: "calc(40px + 40px)"
         }}
@@ -67,7 +72,7 @@ const BlogPage = ({ data }) => {
         >
           Development
         </button>
-      </div>
+      </Borre>
       {/*<div>
         {filteredPosts.map((p) => (
           <div key={p.id} >
@@ -79,7 +84,9 @@ const BlogPage = ({ data }) => {
         ))}
       </div>*/}
 
-      <div
+      <Borre
+        $mdSpan={10}
+        $smSpan={12}
         style={{
           width: "100%",
           display: "flex",
@@ -137,9 +144,10 @@ const BlogPage = ({ data }) => {
 
       </TransitionGroup>
 
-      </div>
-
+    </Borre>
+    </Kard>
     </StyledSafeArea>
+    </>
   )
 }
 
