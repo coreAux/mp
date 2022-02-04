@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components"
-
+import MickeyLogo from "./images/logo_mickey.svg"
+import MickeyLogoDarkmode from "./images/logo_mickey_darkmode.svg"
 export const smallBreakPoint = "700"
 
 export const GlobalStyle = createGlobalStyle`
@@ -95,8 +96,16 @@ export const GlobalStyle = createGlobalStyle`
     letter-spacing: var(--letter-spacing);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    background-color: var(--white);
     color: var(--black);
+
+    background-color: var(--white);
+    background: url(${MickeyLogo}) 50% 50% / 80% 100% fixed no-repeat, linear-gradient(0deg, var(--white), var(--white));
+
+    .darkmode & {
+      background: url(${MickeyLogoDarkmode}) 50% 50% / 80% 100% fixed no-repeat, linear-gradient(0deg, var(--white), var(--white));
+      color: var(--black);
+    }
+
     // width: 100vw;
     // overflow-x: hidden;
 

@@ -7,7 +7,7 @@ import Hero from "../components/Hero"
 
 const testArr = [0,1,2,3,4,5,6,7,8,9,10]
 
-const IndexPage = ({ scrollYRef, darkmode }) => {
+const IndexPage = () => {
   const [windowWidth, setWindowWidth] = React.useState(100)
   const [windowHeight, setWindowHeight] = React.useState(100)
   const windowWidthRef = React.useRef()
@@ -39,12 +39,7 @@ const IndexPage = ({ scrollYRef, darkmode }) => {
         title="Mickey"
         description="MaMickster..."
       />
-      <Hero
-        windowWidthRef={windowWidthRef}
-        windowHeightRef={windowHeightRef}
-        darkmode={darkmode}
-        scrollYRef={scrollYRef}
-      />
+      <Hero />
       <SafeArea>
         <h1>Mickey / Header 1</h1>
         <p>

@@ -4,32 +4,19 @@ import { getImage, GatsbyImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 import { SafeArea, Kard, Borre } from "../styles"
 
-import Loadable from "@loadable/component"
-const MickeyTwo = Loadable(() => import("../components/MickeyTwo"))
-
-const Wrapper = styled.section`
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-`
-
-const ContentWrapper = styled.div`
-  min-height: 75vh;
-  width: 100%;
-  z-index: 2;
-  grid-area: 1 / 1 / auto / auto;
-
-  display: grid;
-  place-items: center;
-`
-
 const StyledGatsbyImage = styled(GatsbyImage)`
   isolation: isolate;
   border-radius: 9999px;
   filter: brightness(1.25);
 `
 
-const Hero = ({ windowWidthRef, windowHeightRef, scrollYRef, darkmode }) => {
+const StyledSafeArea = styled(SafeArea)`
+  min-height: 75vh;
+  display: grid;
+  place-items: center;
+`
+
+const Hero = () => {
   const data = useStaticQuery(graphql`
     query hero_image {
       imageSharp(original: {src: {regex: "/mickey_hero/"}}) {
@@ -40,27 +27,9 @@ const Hero = ({ windowWidthRef, windowHeightRef, scrollYRef, darkmode }) => {
   const image = getImage(data.imageSharp.gatsbyImageData)
 
   return (
-    <SafeArea>
-      <Wrapper>
-
-
-      <div
-        style={{
-          height: "75vh",
-          gridArea: "1 / 1 / auto / auto"
-        }}
-      >
-        <MickeyTwo
-          windowWidth={windowWidthRef}
-          windowHeight={windowHeightRef}
-          scrollY={scrollYRef}
-          darkmode={darkmode}
-        />
-      </div>
-
-      <ContentWrapper>
-        <Kard>
-        <Borre $mdSpan={6} $smSpan={12} $smallOrder={2}>
+    <StyledSafeArea>
+      <Kard>
+        <Borre $mdSpan={6} $smSpan={12} $smOrder={2}>
           <h1>
             Better web, more spiders.
           </h1>
@@ -71,7 +40,7 @@ const Hero = ({ windowWidthRef, windowHeightRef, scrollYRef, darkmode }) => {
         <Borre
           $mdSpan={6}
           $smSpan={12}
-          $smallOrder={1}
+          $smOrder={1}
           style={{
             justifySelf: "center",
             display: "grid",
@@ -96,11 +65,7 @@ const Hero = ({ windowWidthRef, windowHeightRef, scrollYRef, darkmode }) => {
 
         </Borre>
       </Kard>
-      </ContentWrapper>
-
-
-      </Wrapper>
-    </SafeArea>
+    </StyledSafeArea>
   )
 }
 

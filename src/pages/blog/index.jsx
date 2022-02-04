@@ -1,11 +1,12 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 
 import { TransitionGroup, Transition } from "react-transition-group"
 import styled from "styled-components"
 import { SafeArea, Kard, Borre } from "../../styles"
 
 import SEOComponent from "../../components/SEOComponent"
+import BlogPost from "../../components/BlogPost"
 
 const StyledSafeArea = styled(SafeArea)`
   background-size: 20px 20px;
@@ -109,35 +110,10 @@ const BlogPage = ({ data }) => {
             }}
           >
             {(state) => (
-              <>
-                <div style={{
-                    opacity: state === "entered" ? 1 : 0,
-                    transform: `
-                    ${state === "entered" ? "translate3d(0, 0, 0)" : ( state === "entering" ? "translate3d(-50%, 0, 0)" : ( state === "exiting" && "translate3d(50%, 0, 0)" ) )}
-                    `,
-                    // transition: "opacity 100ms, transform 100ms, height 200ms 100ms",
-                    transition: state !== "entered" ? "opacity 100ms, transform 100ms, height 200ms 100ms" : "opacity 100ms 200ms, transform 100ms 200ms, height 200ms",
-                    willChange: "transform, opacity, height",
-                    height: state === "entered" ? "100px" : "0px",
-                    padding: "10px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-
-                    backgroundImage: "radial-gradient(circle 4px at 75% 25%, var(--circle-color) 98%, transparent 98%), radial-gradient(circle 8px at 25% 25%, var(--circle-color) 98%, transparent 98%), radial-gradient(circle 4px at 25% 75%, var(--circle-color) 98%, transparent 98%), radial-gradient(circle 8px at 75% 75%, var(--circle-color) 98%, var(--white) 98%)",
-                    backgroundSize: "40px 40px",
-                    borderRadius: "var(--border-radius)",
-                    boxShadow: "var(--shadow-elevation-medium)",
-                    backgroundPosition: "10px 10px",
-                  }} key={p.id} >
-                  <h2><Link to={`${p.slug}`}>
-                    {p.frontmatter.title}
-                  </Link></h2>
-                  <p>{p.frontmatter.date} - {p.timeToRead} min read</p>
-                  <p>{p.frontmatter.description}</p>
-                </div>
-              </>
+              <BlogPost
+                state={state}
+                post={p}
+              />
             )}
           </Transition>
         ))}
