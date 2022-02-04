@@ -48,7 +48,7 @@ export default AboutPage
 export const pageQuery = graphql`
   query {
     imageSharp(original: {src: {regex: "/mickey_about/"}}) {
-      gatsbyImageData(aspectRatio: 1, placeholder: BLURRED, width: 400, quality: 100)
+      gatsbyImageData(aspectRatio: 1, width: 400)
     }
   }
 `

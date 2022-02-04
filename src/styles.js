@@ -45,6 +45,7 @@ export const GlobalStyle = createGlobalStyle`
     --letter-spacing: 0px;
     --letter-spacing-inverted: .5px;
     --shadow-color: 252deg 7% 60%;
+    --blogpost-color: hsl(220deg 10% 98%);
     --circle-color: hsl(0deg, 0%, 98%);
     color-scheme: light;
 
@@ -62,6 +63,7 @@ export const GlobalStyle = createGlobalStyle`
       --letter-spacing-inverted: 0px;
       // --shadow-color: 253deg 0% 0%;
       --shadow-color: 0deg 0% 0%;
+      --blogpost-color: hsl(220deg 10% 7%);
       --circle-color: hsl(0deg, 0%, 4%);
       color-scheme: dark;
 
@@ -101,9 +103,16 @@ export const GlobalStyle = createGlobalStyle`
     background-color: var(--white);
     background: url(${MickeyLogo}) 50% 50% / 80% 100% fixed no-repeat, linear-gradient(0deg, var(--white), var(--white));
 
+    @media (max-width: ${smallBreakPoint}px) {
+      background: url(${MickeyLogo}) 10% 10% / 10% 2%, linear-gradient(0deg, var(--white), var(--white));
+    }
+
     .darkmode & {
       background: url(${MickeyLogoDarkmode}) 50% 50% / 80% 100% fixed no-repeat, linear-gradient(0deg, var(--white), var(--white));
-      color: var(--black);
+
+      @media (max-width: ${smallBreakPoint}px) {
+        background: url(${MickeyLogoDarkmode}) 10% 10% / 10% 2%, linear-gradient(0deg, var(--white), var(--white));
+      }
     }
 
     // width: 100vw;
@@ -231,6 +240,10 @@ export const GlobalStyle = createGlobalStyle`
 export const SafeArea = styled.div`
   padding-right: calc(40px + env(safe-area-inset-right));
   padding-left: calc(40px + env(safe-area-inset-left));
+
+  & + & {
+    margin-top: 10vh;
+  }
 `
 
 export const Button = styled.button`

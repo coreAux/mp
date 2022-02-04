@@ -20,7 +20,7 @@ const Hero = () => {
   const data = useStaticQuery(graphql`
     query hero_image {
       imageSharp(original: {src: {regex: "/mickey_hero/"}}) {
-        gatsbyImageData(quality: 100, placeholder: BLURRED, width: 400, transformOptions: {duotone: {highlight: "#ffffff", shadow: "#000000"}})
+        gatsbyImageData(width: 400, transformOptions: {duotone: {highlight: "#ffffff", shadow: "#000000"}})
       }
     }
   `)

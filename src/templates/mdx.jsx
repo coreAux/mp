@@ -1,7 +1,7 @@
 import React from "react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
-import { graphql, Link } from "gatsby"
+import { graphql, Link, navigate } from "gatsby"
 
 import styled, { css } from "styled-components"
 
@@ -9,6 +9,8 @@ import SEOComponent from "../components/SEOComponent"
 
 const ButtonStyles = css`
   color: var(--white);
+  border: none;
+  cursor: pointer;
   position: sticky;
   background: var(--black);
   z-index: 55;
@@ -27,7 +29,7 @@ const ButtonStyles = css`
   }
 `
 
-const BackButton = styled(Link)`
+const BackButton = styled.button`
   ${ButtonStyles}
   top: calc(20px + 40px + 20px);
 `
@@ -106,7 +108,7 @@ const MdxPage = ({
           margin: "0 auto",
         }}
       >
-      <BackButton to="/blog/">Back</BackButton>
+      <BackButton onClick={() => navigate("/blog/")}>Back</BackButton>
       <h1>{title}</h1>
 
       <MDXProvider>
