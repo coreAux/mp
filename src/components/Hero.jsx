@@ -7,7 +7,8 @@ import { SafeArea, Kard, Borre } from "../styles"
 const StyledGatsbyImage = styled(GatsbyImage)`
   isolation: isolate;
   border-radius: 9999px;
-  filter: brightness(1.25);
+  border: 10px solid white;
+  // filter: brightness(1.25);
 `
 
 const StyledSafeArea = styled(SafeArea)`
@@ -20,10 +21,11 @@ const Hero = () => {
   const data = useStaticQuery(graphql`
     query hero_image {
       imageSharp(original: {src: {regex: "/mickey_hero/"}}) {
-        gatsbyImageData(width: 400, transformOptions: {duotone: {highlight: "#ffffff", shadow: "#000000"}})
+        gatsbyImageData(width: 400)
       }
     }
   `)
+  /* , transformOptions: {duotone: {highlight: "#ffffff", shadow: "#000000"}} */
   const image = getImage(data.imageSharp.gatsbyImageData)
 
   return (
@@ -34,7 +36,7 @@ const Hero = () => {
             Better web, more spiders.
           </h1>
           <p>
-            Creating the essence of the spider, web and other funky components. What is not in the web may not exists without a pattern.
+            Sites built with precise design, high performance, and well written content.
           </p>
         </Borre>
         <Borre

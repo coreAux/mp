@@ -51,7 +51,7 @@ const IndexPage = () => {
         </p>
       </SafeArea>
       <SafeArea>
-        <Kard>
+        <Kard style={{ alignItems: "flex-start" }}>
           <Borre $mdSpan={4} >
             <h1>Principles / Beliefs / Values</h1>
           </Borre>

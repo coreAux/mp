@@ -27,9 +27,15 @@ const StyledFooter = styled.footer`
   background-position: bottom center;
   background:
     ${raster.map((r, i) => (
-      `radial-gradient(circle ${r * 2}px at 50% 50%, var(--circle-color) 98%, ${r % 2 === 0 ? "transparent 98%" : "transparent 98%"}) ${r % 2 === 0 ? "0" : (raster.length * 5 + 5) / 2}px ${(r * i) * 2}px/${raster.length * 5 + 5}px ${r * 4}px repeat-x${r === raster.length ? "" : ", "}`
+      `radial-gradient(circle ${r * 2}px at 50% 50%, var(--circle-color) 98%, ${r % 2 === 0 ? "transparent 98%" : "transparent 98%"}) ${r % 2 === 0 ? "0" : (raster.length * 2 + 5) / 2}px ${(r * i) * 1.6}px/${raster.length * 2 + 5}px ${r * 4}px repeat-x${r === raster.length ? "" : ", "}`
     ))};
 `
+
+/*
+${raster.map((r, i) => (
+  `radial-gradient(circle ${r * 2}px at 50% 50%, var(--circle-color) 98%, ${r % 2 === 0 ? "transparent 98%" : "transparent 98%"}) ${r % 2 === 0 ? "0" : (raster.length * 5 + 5) / 2}px ${(r * i) * 2}px/${raster.length * 5 + 5}px ${r * 4}px repeat-x${r === raster.length ? "" : ", "}`
+))}
+*/
 
 /*
   radial-gradient(circle 10px at 50% 50%, #000 98%, var(--white)) 100% 100%/30px 20px repeat-x,
@@ -139,7 +145,7 @@ const Footer = () => {
             </IconLink>
           </div>
         </div>
-        <div
+        {/*<div
           style={{
             display: "flex",
             flexDirection: "column",
@@ -168,7 +174,7 @@ const Footer = () => {
           <p>Example</p>
           <p>Example</p>
           <p>Example</p>
-        </div>
+        </div>*/}
         <div
           style={{
             display: "flex",
@@ -176,6 +182,7 @@ const Footer = () => {
             alignItems: "center",
             justifyContent: "space-around",
             height: "100%",
+            flexGrow: 1,
           }}
         >
           <Button
@@ -184,7 +191,7 @@ const Footer = () => {
               setModalOpen(true)
             }}
           >
-            Contact
+            Send me a message
           </Button>
         </div>
       </StyledFooter>

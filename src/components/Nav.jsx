@@ -258,7 +258,7 @@ const StyledLink = styled(Link)`
 `
 
 const Nav = ({ darkmode, toggleDarkmode, contrastmode, toggleContrastmode }) => {
-  const [openNav, setOpenNav] = useState(false)
+  const [openNav, setOpenNav] = useState(true)
 
   // Handle scrolling of body when nav is open in small devices
   useEffect(() => {
@@ -333,13 +333,13 @@ const Nav = ({ darkmode, toggleDarkmode, contrastmode, toggleContrastmode }) => 
                   <StyledLink to="/about/" activeClassName="active" onClick={toggleNavOnSmallDevice}>
                     About
                   </StyledLink>
-                  <StyledLink to="/" activeClassName="n-active"
+                  {process.env.NODE_ENV === "development" && <StyledLink to="/" activeClassName="n-active"
                     onClick={toggleNavOnSmallDevice}>
                     Work
-                  </StyledLink>
-                  <StyledLink to="/blog/" activeClassName="active" partiallyActive={true} onClick={toggleNavOnSmallDevice}>
+                  </StyledLink>}
+                  {process.env.NODE_ENV === "development" && <StyledLink to="/blog/" activeClassName="active" partiallyActive={true} onClick={toggleNavOnSmallDevice}>
                     Blog
-                  </StyledLink>
+                  </StyledLink>}
                 </MenuWrapper>
                 <ToggleWrapper>
                   <ToggleContrast
