@@ -1,5 +1,9 @@
 const randomInt = (l, h) => {
-  const randomNumber = Math.floor(Math.random() * h) + l
+  // console.log("l: ", l)
+  // console.log("h: ", h)
+  const randomNumber = Math.round(Math.random() * (h - l)) + l
+
+  // console.log("randomnumber: ", randomNumber)
   return randomNumber
 }
 

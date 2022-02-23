@@ -113,7 +113,8 @@ const MenuWrapper = styled.div`
 
   @media (max-width: ${smallBreakPoint}px) {
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    margin-top: 40px;
 
     & > a,
     & > h1 {
@@ -144,6 +145,10 @@ const ToggleWrapper = styled.div`
 const H1 = styled.h1`
   font-size: 24px;
   cursor: pointer;
+
+  @media (max-width: ${smallBreakPoint}px) {
+    font-size: 48px;
+  }
 `
 
 const StyledLink = styled(Link)`
@@ -251,6 +256,10 @@ const StyledLink = styled(Link)`
   }
 
   @media (max-width: ${smallBreakPoint}px) {
+    margin-top: 10px;
+    font-family: Roboto, sans-serif;
+    font-size: 48px;
+
     &.active {
       color: var(--primary-color);
     }
@@ -385,6 +394,10 @@ const Nav = () => {
                       navigate("/")
                       toggleNavOnSmallDevice()
                     }}
+                    focusable={true}
+                    role="link"
+                    aria-label="Home"
+                    tabIndex={0}
                   >
                     MICKEY
                   </H1>

@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import styled, { css } from "styled-components"
-import { Button } from "../styles"
+import { Button, smallBreakPoint } from "../styles"
 import { ModalContext } from "./Contexts"
 
 import InstagramIcon from "../svgs/InstagramIcon"
@@ -16,7 +16,7 @@ const raster = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 
 const StyledFooter = styled.footer`
   // position: sticky;
-  flex-grow: 1;
+  // flex-grow: 1;
   color: var(--white);
   display: flex;
   align-items: center;
@@ -27,7 +27,7 @@ const StyledFooter = styled.footer`
   // min-height: 30vh;
   // height: 30vh;
   height: 40px;
-  width: calc(100% - 40px - 40px - 40px - 20px - env(safe-area-inset-right) - env(safe-area-inset-left));
+  width: calc(100vw - 40px - 40px - 40px - 40px - env(safe-area-inset-right) - env(safe-area-inset-left));
 
   background-position: bottom center;
   background: var(--footer-bg-color);
@@ -37,6 +37,13 @@ const StyledFooter = styled.footer`
     ${raster.map((r, i) => (
       `radial-gradient(circle ${r * 2}px at 50% 50%, var(--circle-color) 98%, ${r % 2 === 0 ? "transparent 98%" : "transparent 98%"}) ${r % 2 === 0 ? "0" : (raster.length * 2 + 5) / 2}px ${(r * i) * 1.6}px/${raster.length * 2 + 5}px ${r * 4}px repeat-x${r === raster.length ? "" : ", "}`
     ))};*/
+
+
+  @media (max-width: ${smallBreakPoint}px) {
+    order: 3;
+    width: 100vw;
+    margin-top: 20px;
+  }
 `
 
 /*
@@ -99,7 +106,7 @@ const StyledMickeyIcon = styled(MickeyIcon)`
   // height: 50px;
   width: 40px;
   height: 40px;
-  margin-left: 20px;
+  // margin-left: 20px;
   transition: none;
 
   &:hover {
@@ -150,6 +157,7 @@ const FooterWrapper = styled.div`
   position: sticky;
   top: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   margin: 50px calc(20px + env(safe-area-inset-right)) 20px calc(20px + env(safe-area-inset-left));
@@ -168,7 +176,7 @@ const Footer = () => {
           alignItems: "flex-start",
           justifyContent: "space-around",
           height: "100%",
-          flexGrow: 1,
+          width: "40px",
         }}
       >
         <StyledButton
@@ -206,8 +214,8 @@ const Footer = () => {
               padding: "0 10px",
             }}
           >
-            <div>
-              &copy; 2022
+            <div style={{ fontFamily: "Roboto, sans-serif", color: "hsla(var(--white-hsl) / 25%)" }}>
+              &copy; 2022 MICKEY
             </div>
             <div
               style={{
@@ -262,7 +270,7 @@ const Footer = () => {
           <p>Example</p>
         </div>*/}
       </StyledFooter>
-      <div>
+      <div style={{ width: "40px" }}>
         <StyledMickeyIcon />
       </div>
     </FooterWrapper>

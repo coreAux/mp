@@ -265,10 +265,10 @@ export const Button = styled.button`
   text-transform: uppercase;
   font-size: inherit;
   font-weight: 600;
-  color: ${({$invert}) => $invert ? "var(--black)" : "var(--white)"};
+  color: ${({$invert, $secondary}) => $invert || $secondary ? "var(--black)" : "var(--white)"};
   cursor: pointer;
-  border: none;
-  background: ${({$invert}) => $invert ? "var(--white)" : "var(--black)"};
+  border: ${({$secondary}) => $secondary ? "2px solid var(--black)" : "2px solid var(--white)"};
+  background: ${({$invert, $secondary}) => $invert || $secondary ? "var(--white)" : "var(--black)"};
   padding: 4px 8px;
   border-radius: 9999px;
 

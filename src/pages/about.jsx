@@ -24,6 +24,7 @@ const MainGatsbyImage = styled(GatsbyImage)`
   isolation: isolate;
   border-radius: ${({$borderRadius}) => `var(--border-radius-${$borderRadius})`};
   border: 5px solid var(--primary-color);
+  margin-bottom: 50px;
 `
 
 const StyledKard = styled(Kard)`

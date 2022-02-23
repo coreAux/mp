@@ -3,6 +3,10 @@ import * as Yup from "yup"
 import { Formik, Form, useField } from "formik"
 
 import { Transition } from "react-transition-group"
+
+import randomInt from "../utils/randomInt"
+import confetti from "canvas-confetti"
+
 import styled, { css } from "styled-components"
 import { Button, Emoji } from "../styles"
 
@@ -139,13 +143,15 @@ const SendButton = styled(Button)`
 `
 
 const FormikWrapper = styled.div`
-  transform: ${({$state}) => $state === "entered" ? "translate3d(0,0,0)" : "translate3d(-420px, 0, 0)"};
+  // transform: ${({$state}) => $state === "entered" ? "translate3d(0,0,0)" : "translate3d(-420px, 0, 0)"};
+  opacity: ${({$state}) => $state === "entered" ? 1 : 0};
+  grid-area: 1 / 1;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  transition: transform .3s;
+  transition: transform .3s, opacity .3s;
   position: absolute;
   top: 0;
   left: 0;
@@ -153,13 +159,15 @@ const FormikWrapper = styled.div`
 `
 
 const SuccessWrapper = styled.div`
-  transform: ${({$state}) => $state === "entered" ? "translate3d(0, 0, 0)" : "translate3d(420px, 0, 0)"};
+  // transform: ${({$state}) => $state === "entered" ? "translate3d(0, 0, 0)" : "translate3d(420px, 0, 0)"};
+  opacity: ${({$state}) => $state === "entered" ? 1 : 0};
+  grid-area: 1 / 1;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  transition: transform .3s;
+  transition: transform .3s, opacity .3s;
   position: absolute;
   top: 0;
   left: 0;
@@ -167,9 +175,20 @@ const SuccessWrapper = styled.div`
 `
 
 const RelativeDiv = styled.div`
+  display: grid;
+  place-items: center;
   margin-top: 20px;
   position: relative;
 `
+
+const shootConfetti = () => {
+  return confetti({
+    angle: randomInt(70, 110),
+    spread: randomInt(50, 100),
+    particleCount: randomInt(50, 150),
+    origin: { y: 0.7 }
+  })
+}
 
 const ContactComponent = () => {
   const [success, setSuccess] = useState(false)
@@ -222,6 +241,7 @@ const ContactComponent = () => {
       console.log("success: ", hello)
       setSendButtonText("Send")
       setSuccess(true)
+      shootConfetti()
     } catch (e) {
       console.log("error: ", e)
       setSendButtonText("Send")
@@ -266,11 +286,21 @@ const ContactComponent = () => {
               <Emoji role="img" aria-label="Party Face" $size="64px">🥳</Emoji>
               <h2>Success!</h2>
               <p>Thanks for your message! I&apos;ll get back to you as soon as possible.</p>
+
+              <Button
+                $secondary={true}
+                style={{marginTop: "20px"}}
+                onClick={() => shootConfetti()}
+              >
+                More confetti
+              </Button>
+
               {modalOpen && <SendButton
                 onClick={() => setModalOpen(false)}
               >
                 Close
               </SendButton>}
+
             </SuccessWrapper>
           )}
         </Transition>
@@ -288,12 +318,12 @@ const ContactComponent = () => {
             >
               <Formik
                 initialValues={{
-                 // name: "Tims",
-                 // email: "me@domain.ltd",
-                 // message: "This is le message.."
-                 name: "",
-                 email: "",
-                 message: ""
+                 name: "Tims",
+                 email: "me@domain.ltd",
+                 message: "This is le message.."
+                 // name: "",
+                 // email: "",
+                 // message: ""
                }}
                validateOnMount={true}
                validationSchema={schema}

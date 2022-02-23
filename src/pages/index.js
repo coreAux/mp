@@ -71,8 +71,8 @@ const IndexPage = () => {
             <p>I love creating unique and personal websites, just like back in the &rsquo;90s</p>
           </Borre>
           <Borre $mdSpan={4} >
-            <h2>Devil is in the details</h2>
-            <p>The importance of details can&apos;t be underestimated, with a keen eye for detail I make sure that your product delivers on all fronts.</p>
+            <h2>The internet is for everyone</h2>
+            <p>It&apos;s a strong belief of mine that the internet should be accessible for anyone, and everyone. Creating accessible sites is ...</p>
           </Borre>
         </Kard>
       </SafeArea>
@@ -85,6 +85,22 @@ const IndexPage = () => {
         >
           Show more!
         </button>
+      </SafeArea>
+      <SafeArea>
+        {process.env.NODE_ENV !== "development" && <><button
+          onClick={() => {
+            if (typeof window !== undefined) {
+              window.gtag("consent", "update", { "analytics_storage": "granted" })
+            }
+        }}
+        >Consent to cookies</button>
+        <button
+          onClick={() => {
+            if (typeof window !== undefined) {
+              window.gtag("consent", "update", { "analytics_storage": "denied" })
+            }
+          }}
+        >Reject cookies</button></>}
       </SafeArea>
     </>
   )
