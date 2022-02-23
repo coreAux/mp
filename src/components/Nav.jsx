@@ -257,8 +257,66 @@ const StyledLink = styled(Link)`
   }
 `
 
-const Nav = ({ darkmode, toggleDarkmode, contrastmode, toggleContrastmode }) => {
+const Nav = () => {
   const [openNav, setOpenNav] = useState(true)
+  const [darkmode, setDarkmode] = useState(false)
+  const [contrastmode, setContrastmode] = useState(false)
+
+  const toggleDarkmode = (event) => {
+    if (event.key === "Tab" || event.key === "Shift") {
+      // Avoid anything happening when tabbing...
+    } else {
+      setDarkmode(!darkmode)
+      setTimeout(() => {
+        document.documentElement.classList.toggle("darkmode")
+      }, 300)
+    }
+  }
+
+  const toggleContrastmode = (event) => {
+    if (event.key === "Tab" || event.key === "Shift") {
+      // Avoid anything happening when tabbing...
+    } else {
+      setContrastmode(!contrastmode)
+      document.documentElement.classList.toggle("contrastmode")
+    }
+  }
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      if (darkmode) {
+        document.querySelector("meta[name='theme-color']").setAttribute("content","#111015")
+      } else if (!darkmode) {
+        document.querySelector("meta[name='theme-color']").setAttribute("content","#f1f0f5")
+      }
+    }
+  }, [darkmode])
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      const initDarkmode = !!window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+
+      setDarkmode(initDarkmode)
+      if (initDarkmode) {
+        document.documentElement.classList.add("darkmode")
+      } else if (!initDarkmode) {
+        document.documentElement.classList.remove("darkmode")
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      const initContrastmode = !!window.matchMedia && window.matchMedia("(prefers-contrast: more)").matches
+
+      setContrastmode(initContrastmode)
+      if (initContrastmode) {
+        document.documentElement.classList.add("contrastmode")
+      } else if (!initContrastmode) {
+        document.documentElement.classList.remove("constrastmode")
+      }
+    }
+  }, [])
 
   // Handle scrolling of body when nav is open in small devices
   useEffect(() => {

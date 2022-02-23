@@ -17,6 +17,11 @@ export const GlobalStyle = createGlobalStyle`
     --secondary-color: #f64060;
     --secondary-color-hsl: 349deg 91% 61%;
     --border-radius: 10px;
+    --border-radius-1: 30% 70% 70% 30% / 53% 30% 70% 47%;
+    --border-radius-2: 53% 47% 34% 66% / 63% 46% 54% 37%;
+    --border-radius-3: 37% 63% 56% 44% / 49% 56% 44% 51%;
+    --border-radius-4: 63% 37% 37% 63% / 43% 37% 63% 57%;
+    --border-radius-5: 49% 51% 48% 52% / 57% 44% 56% 43%;
     --shadow-elevation-low:
       0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.34),
       0.4px 0.8px 1px -1.2px hsl(var(--shadow-color) / 0.34),
@@ -40,8 +45,10 @@ export const GlobalStyle = createGlobalStyle`
     /* LIGHT VARS */
     --white: #f1f0f5;
     --white-hsl: 252deg 20% 95%;
+    --footer-bg-color: var(--black);
     --black: #111015;
-    --black-hsl: 252deg 14% 7%;
+    // --black-hsl: 252deg 14% 7%;
+    --black-hsl: 200deg 11% 9%;
     --letter-spacing: 0px;
     --letter-spacing-inverted: .5px;
     --shadow-color: 252deg 7% 60%;
@@ -50,13 +57,15 @@ export const GlobalStyle = createGlobalStyle`
     color-scheme: light;
 
     &.contrastmode {
-      --primary-color: #157854;
+      --primary-color: #00aa50 /*#157854*/;
     }
 
     /* DARK VARS */
     &.darkmode {
       --white: #111015;
-      --white-hsl: 252deg 14% 7%;
+      // --white-hsl: 252deg 14% 7%;
+      --white-hsl: 200deg 11% 9%;
+      --footer-bg-color: var(--black);
       --black: #f1f0f5;
       --black-hsl: 252deg 20% 95%;
       --letter-spacing: .5px;
@@ -88,7 +97,7 @@ export const GlobalStyle = createGlobalStyle`
     color: hsl(var(--black-hsl) / .8);
   }
 
-  html, body {
+  html/*, body*/ {
     height: 100%;
   }
 
@@ -99,6 +108,7 @@ export const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     color: var(--black);
+    padding-bottom: 1px;
 
     background-color: var(--white);
     background: url(${MickeyLogo}) 50% 50% / 80% 100% fixed no-repeat, linear-gradient(0deg, var(--white), var(--white));
@@ -147,8 +157,12 @@ export const GlobalStyle = createGlobalStyle`
     font-family: "Roboto", sans-serif;
     font-weight: 900;
     text-transform: uppercase;
-    font-size: 64px;
+    font-size: 48px;
     line-height: 1;
+
+    main & {
+      margin-bottom: 16px;
+    }
 
     @media (max-width: ${smallBreakPoint}px) {
       font-size: 32px;
@@ -251,10 +265,10 @@ export const Button = styled.button`
   text-transform: uppercase;
   font-size: inherit;
   font-weight: 600;
-  color: var(--white);
+  color: ${({$invert}) => $invert ? "var(--black)" : "var(--white)"};
   cursor: pointer;
   border: none;
-  background: var(--black);
+  background: ${({$invert}) => $invert ? "var(--white)" : "var(--black)"};
   padding: 4px 8px;
   border-radius: 9999px;
 

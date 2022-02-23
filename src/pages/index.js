@@ -67,7 +67,7 @@ const IndexPage = () => {
             {/*<h1>Principles / Beliefs / Values</h1>*/}
           </Borre>
           <Borre $mdSpan={4} >
-            <h2>{"Style, function, personality"}</h2>
+            <h2>{"Pixel perfection"}</h2>
             <p>I love creating unique and personal websites, just like back in the &rsquo;90s</p>
           </Borre>
           <Borre $mdSpan={4} >

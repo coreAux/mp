@@ -8,27 +8,35 @@ import LinkedInIcon from "../svgs/LinkedInIcon"
 import TwitterIcon from "../svgs/TwitterIcon"
 import GitHubIcon from "../svgs/GitHubIcon"
 import MickeyIcon from "../svgs/MickeyIcon"
+import MessageIcon from "../svgs/MessageIcon"
 
 import ContactComponent from "./ContactComponent"
 
 const raster = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 
 const StyledFooter = styled.footer`
-  position: sticky;
+  // position: sticky;
+  flex-grow: 1;
+  color: var(--white);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  top: 100%;
-  margin: 50px 0 0 0;
-  padding: 20px calc(20px + env(safe-area-inset-right)) 20px calc(20px + env(safe-area-inset-left));
-  min-height: 30vh;
-  height: 30vh;
+  // top: 100%;
+  // margin: 50px calc(20px + env(safe-area-inset-right)) 20px calc(20px + env(safe-area-inset-left));
+  // padding: 20px;
+  // min-height: 30vh;
+  // height: 30vh;
+  height: 40px;
+  width: calc(100% - 40px - 40px - 40px - 20px - env(safe-area-inset-right) - env(safe-area-inset-left));
 
   background-position: bottom center;
-  background:
+  background: var(--footer-bg-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-elevation-high);
+  /*background:
     ${raster.map((r, i) => (
       `radial-gradient(circle ${r * 2}px at 50% 50%, var(--circle-color) 98%, ${r % 2 === 0 ? "transparent 98%" : "transparent 98%"}) ${r % 2 === 0 ? "0" : (raster.length * 2 + 5) / 2}px ${(r * i) * 1.6}px/${raster.length * 2 + 5}px ${r * 4}px repeat-x${r === raster.length ? "" : ", "}`
-    ))};
+    ))};*/
 `
 
 /*
@@ -50,11 +58,18 @@ const IconCSS = css`
   height: 20px;
 
   & > path {
-    fill: var(--black);
+    fill: var(--white);
   }
 
   & > circle {
     fill: none;
+  }
+
+  & > polyline,
+  & > polygon {
+    fill: none;
+    stroke: var(--white);
+    stroke-width: 20px;
   }
 `
 
@@ -75,14 +90,28 @@ const StyledGitHubIcon = styled(GitHubIcon)`
   ${IconCSS}
 `
 
+const StyledMessageIcon = styled(MessageIcon)`
+  ${IconCSS}
+`
+
 const StyledMickeyIcon = styled(MickeyIcon)`
-  width: 50px;
-  height: 50px;
+  // width: 50px;
+  // height: 50px;
+  width: 40px;
+  height: 40px;
+  margin-left: 20px;
+  transition: none;
+
+  &:hover {
+    transform: rotate(360deg);
+    transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
 `
 
 const IconLink = styled.a`
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
+  margin-left: 20px;
   border-radius: 9999px;
   background: transparent;
   display: flex;
@@ -96,18 +125,65 @@ const IconLink = styled.a`
       & > svg > path {
         fill: var(--primary-color);
       }
-
     }
   }
+`
+
+const StyledButton = styled(Button)`
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (hover ) {
+    &:hover > svg > polygon,
+    &:hover > svg > polyline {
+      fill: var(--black);
+      stroke: var(--white);
+    }
+  }
+`
+
+const FooterWrapper = styled.div`
+  height: 40px;
+  position: sticky;
+  top: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 50px calc(20px + env(safe-area-inset-right)) 20px calc(20px + env(safe-area-inset-left));
 `
 
 const Footer = () => {
   const { setModalOpen, setModalComponent } = useContext(ModalContext)
 
   return (
-    <>
+    <FooterWrapper>
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          justifyContent: "space-around",
+          height: "100%",
+          flexGrow: 1,
+        }}
+      >
+        <StyledButton
+          $invert={false}
+          onClick={() => {
+            setModalComponent(<ContactComponent/>)
+            setModalOpen(true)
+          }}
+        >
+          <StyledMessageIcon />
+        </StyledButton>
+      </div>
+
       <StyledFooter>
-        <div
+        {/*<div
           style={{
             display: "flex",
             flexDirection: "column",
@@ -115,35 +191,45 @@ const Footer = () => {
             justifyContent: "space-between",
             height: "100%",
           }}
-        >
-          <div>
-            <StyledMickeyIcon />
-          </div>
-          <div>
+        >*/}
+
+          {/*<div>
             <p>Causing chaos since &rsquo;89.</p>
-          </div>
+          </div>*/}
           <div
             style={{
               display: "flex",
+              flexDirection: "row",
               width: "100%",
               alignItems: "center",
               justifyContent: "space-between",
-              transform: "translate3d(-10px, 0, 0)"
+              padding: "0 10px",
             }}
           >
-            <IconLink href="https://www.twitter.com/hejmikael" target="_blank" rel="noreferrer" aria-label="Link to Twitter">
-              <StyledTwitterIcon />
-            </IconLink>
-            <IconLink href="https://www=.github.com/coreAux" target="_blank" rel="noreferrer" aria-label="Link to GitHub">
-              <StyledGitHubIcon />
-            </IconLink>
-            <IconLink href="https://www.instagram.com/hejmikael" target="_blank" rel="noreferrer" aria-label="Link to Instagram">
-              <StyledInstagramIcon />
-            </IconLink>
-            <IconLink href="https://www.linkedin.com/in/petersenmikael" target="_blank" rel="noreferrer" aria-label="Link to LinkedIn">
-              <StyledLinkedInIcon />
-            </IconLink>
-          </div>
+            <div>
+              &copy; 2022
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-end",
+              }}
+            >
+              <IconLink href="https://www.twitter.com/hejmikael" target="_blank" rel="noreferrer" aria-label="Link to Twitter">
+                <StyledTwitterIcon />
+              </IconLink>
+              <IconLink href="https://www=.github.com/coreAux" target="_blank" rel="noreferrer" aria-label="Link to GitHub">
+                <StyledGitHubIcon />
+              </IconLink>
+              <IconLink href="https://www.instagram.com/hejmikael" target="_blank" rel="noreferrer" aria-label="Link to Instagram">
+                <StyledInstagramIcon />
+              </IconLink>
+              <IconLink href="https://www.linkedin.com/in/petersenmikael" target="_blank" rel="noreferrer" aria-label="Link to LinkedIn">
+                <StyledLinkedInIcon />
+              </IconLink>
+            </div>
+          {/*</div>*/}
         </div>
         {/*<div
           style={{
@@ -175,27 +261,11 @@ const Footer = () => {
           <p>Example</p>
           <p>Example</p>
         </div>*/}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "space-around",
-            height: "100%",
-            flexGrow: 1,
-          }}
-        >
-          <Button
-            onClick={() => {
-              setModalComponent(<ContactComponent/>)
-              setModalOpen(true)
-            }}
-          >
-            Send me a message
-          </Button>
-        </div>
       </StyledFooter>
-    </>
+      <div>
+        <StyledMickeyIcon />
+      </div>
+    </FooterWrapper>
   )
 }
 

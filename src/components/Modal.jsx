@@ -5,6 +5,8 @@ import styled from "styled-components"
 import { RoundButton } from "../styles"
 import { Transition } from "react-transition-group"
 
+import useScrollY from "../hooks/useScrollY"
+
 const ModalBackground = styled.div`
   z-index: 100;
   cursor: pointer;
@@ -92,10 +94,11 @@ const CloseButton = styled(RoundButton)`
   }
 `
 
-const Modal = ({ scrollY }) => {
+const Modal = () => {
   const { modalOpen, setModalOpen, modalComponent } = useContext(ModalContext)
   const [localScroll, setLocalScroll] = React.useState(0)
   const prevModalState = React.useRef(false)
+  const scrollY = useScrollY()
 
   useEffect(() => {
     if (!modalOpen) {

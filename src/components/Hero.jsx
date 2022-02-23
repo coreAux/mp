@@ -17,6 +17,17 @@ const StyledSafeArea = styled(SafeArea)`
   place-items: center;
 `
 
+const StyledSvg = styled.svg`
+  width: auto;
+  height: auto;
+  grid-area: 1 / 1 / auto / auto;
+  font-family: Roboto, sans-serif;
+  text-transform: uppercase;
+  z-index: 2;
+  fill: var(--black);
+  animation: rotate_clockwise infinite linear 120s;
+`
+
 const Hero = () => {
   const data = useStaticQuery(graphql`
     query hero_image {
@@ -33,10 +44,11 @@ const Hero = () => {
       <Kard>
         <Borre $mdSpan={6} $smSpan={12} $smOrder={2}>
           <h1>
-            Better web, more spiders.
+            Bespoke websites.
           </h1>
           <p>
-            Sites built with precise design, high performance, and well written content.
+            When functionality and creativity comes together, I believe it&apos;s the essence of design.
+            Sites built with intuitive design, high performance, and well written content. Everything you need to get more conversions and express you and you&apos;re brand in a way that benefits both your business and customers.
           </p>
         </Borre>
         <Borre
@@ -52,7 +64,7 @@ const Hero = () => {
         >
           <StyledGatsbyImage style={{margin: "24px",gridArea: "1 / 1 / auto / auto"}} image={image} alt="Mickey" />
 
-            <svg id="test" style={{ width: "auto", height: "auto", gridArea: "1 / 1 / auto / auto", fontFamily: "Roboto, sans-serif", textTransform: "uppercase", zIndex: "2", fill: "var(--black)", animation: "rotate_clockwise infinite linear 120s" }} viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
+            <StyledSvg id="test" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <clipPath id="clipPath">
                 <path id="MyPath" d="M15,170
@@ -63,7 +75,7 @@ const Hero = () => {
               <text>
                 <textPath href="#MyPath" side="left" textLength="974">Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — Mickey — </textPath>
               </text>
-            </svg>
+            </StyledSvg>
 
         </Borre>
       </Kard>

@@ -213,37 +213,38 @@ const ContactComponent = () => {
     setError(false)
     setSendButtonText("Sending...")
 
-    // try {
-    //   const promise3 = new Promise((resolve, reject) => {
-    //     setTimeout(resolve, 3000, values)
-    //   })
-    //   const hello = await Promise.all([promise3])
-    //   console.log("success: ", hello)
-    //   setSendButtonText("Send")
-    //   setSuccess(true)
-    // } catch (e) {
-    //   console.log("error: ", e)
-    //   setSendButtonText("Send")
-    //   setError(true)
-    // }
-
     try {
-      const response = await fetch("https://formspree.io/f/xzbodqqw", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify(values)
+      const promise3 = new Promise((resolve, reject) => {
+        console.log(reject)
+        setTimeout(resolve, 3000, values)
       })
-      console.log("response: ", response)
+      const hello = await Promise.all([promise3])
+      console.log("success: ", hello)
       setSendButtonText("Send")
       setSuccess(true)
     } catch (e) {
-      console.error(e)
+      console.log("error: ", e)
       setSendButtonText("Send")
       setError(true)
     }
+
+    // try {
+    //   const response = await fetch("https://formspree.io/f/xzbodqqw", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       "Accept": "application/json"
+    //     },
+    //     body: JSON.stringify(values)
+    //   })
+    //   console.log("response: ", response)
+    //   setSendButtonText("Send")
+    //   setSuccess(true)
+    // } catch (e) {
+    //   console.error(e)
+    //   setSendButtonText("Send")
+    //   setError(true)
+    // }
   }
 
   return (
