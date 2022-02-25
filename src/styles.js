@@ -129,6 +129,7 @@ export const GlobalStyle = createGlobalStyle`
 
   * {
     margin: 0;
+    -webkit-tap-highlight-color: transparent;
   }
 
   *::selection {
@@ -338,23 +339,6 @@ export const GlobalStyle = createGlobalStyle`
         }
       }
     }
-
-    @media (max-width: ${smallBreakPoint}px) {
-      margin-top: 10px;
-      font-family: Roboto, sans-serif;
-      font-size: 48px;
-
-      &.active {
-        color: var(--primary-color);
-      }
-    }
-
-
-
-
-
-
-
 
   }
 

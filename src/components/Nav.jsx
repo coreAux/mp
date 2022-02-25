@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Link, navigate } from "gatsby"
+import { Link } from "gatsby"
 import { Transition } from "react-transition-group"
 import styled, { css } from "styled-components"
 import { smallBreakPoint, RoundButton } from "../styles"
@@ -393,16 +393,14 @@ const Nav = () => {
           >
               <Menu>
                 <MenuWrapper>
-                  <H1 onClick={() => {
-                      navigate("/")
-                      toggleNavOnSmallDevice()
-                    }}
-                    role="link"
+                  <StyledLink
+                    to="/"
+                    onClick={toggleNavOnSmallDevice}
                     aria-label="Home"
                     tabIndex={hideForModal}
                   >
-                    Mickey
-                  </H1>
+                    <H1>Mickey</H1>
+                  </StyledLink>
                   <StyledLink to="/about/" activeClassName="active" onClick={toggleNavOnSmallDevice} tabIndex={hideForModal}>
                     About
                   </StyledLink>
