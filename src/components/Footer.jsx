@@ -140,6 +140,11 @@ const IconLink = styled.a`
     width: 44px;
     height: 44px;
   }
+
+  &[data-focus-visible-added] {
+    width: 44px;
+    height: 44px;
+  }
 `
 
 const StyledButton = styled(Button)`

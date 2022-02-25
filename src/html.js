@@ -21,6 +21,9 @@ export default function HTML(props) {
           dangerouslySetInnerHTML={{ __html: props.body }}
         />
         {props.postBodyComponents}
+
+        <script src="https://unpkg.com/focus-visible" />
+
       </body>
     </html>
   )

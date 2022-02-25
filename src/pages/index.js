@@ -2,6 +2,8 @@ import React from "react"
 
 import { SafeArea, Emoji, Kard, Borre } from "../styles"
 
+import useCookieConsent from "../hooks/useCookieConsent"
+
 import SEOComponent from "../components/SEOComponent"
 import Hero from "../components/Hero"
 
@@ -14,6 +16,8 @@ const IndexPage = () => {
   windowWidthRef.current = windowWidth
   const windowHeightRef = React.useRef()
   windowHeightRef.current = windowHeight
+
+  const { grantCookie, denyCookie } = useCookieConsent()
 
 
   const [splice, setSplice] = React.useState(2)
@@ -88,18 +92,10 @@ const IndexPage = () => {
       </SafeArea>
       <SafeArea>
         {process.env.NODE_ENV !== "development" && <><button
-          onClick={() => {
-            if (typeof window !== undefined) {
-              window.gtag("consent", "update", { "analytics_storage": "granted" })
-            }
-        }}
+          onClick={() => grantCookie()}
         >Consent to cookies</button>
         <button
-          onClick={() => {
-            if (typeof window !== undefined) {
-              window.gtag("consent", "update", { "analytics_storage": "denied" })
-            }
-          }}
+          onClick={() => denyCookie()}
         >Reject cookies</button></>}
       </SafeArea>
     </>

@@ -84,7 +84,7 @@ const ToggleDarkmode = ({ contrastmode, ...props }) => {
           <InnerRing $contrastmode={contrastmode} />
         </OuterRing>
 
-      <InfoHolder>
+      <InfoHolder focusable={false}>
         Contrast: {contrastmode ? "high" : "low"}
       </InfoHolder>
 

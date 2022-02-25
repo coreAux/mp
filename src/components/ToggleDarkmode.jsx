@@ -132,7 +132,7 @@ const ToggleDarkmode = ({ darkmode, ...props }) => {
         )}
       </Transition>
 
-      <InfoHolder>
+      <InfoHolder focusable={false}>
         Darkmode: {darkmode ? "on" : "off"}
       </InfoHolder>
 

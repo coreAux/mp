@@ -1,7 +1,45 @@
-import styled, { createGlobalStyle } from "styled-components"
+import styled, { css, createGlobalStyle } from "styled-components"
 import MickeyLogo from "./images/logo_mickey.svg"
 import MickeyLogoDarkmode from "./images/logo_mickey_darkmode.svg"
 export const smallBreakPoint = "700"
+
+const FocusCSS = css`
+  &:focus {
+    outline: none;
+  }
+
+  &[data-focus-visible-added] {
+    outline: none;
+    color: white;
+    font-weight: 900;
+    background: #dd1188;
+    box-shadow: 0 0 0 4px #dd1188;
+    border-radius: 9999px;
+    border: 2px dashed currentcolor;
+
+    html.darkmode & {
+      background: yellow;
+      box-shadow: 0 0 0 4px yellow;
+      color: black;
+    }
+  }
+
+  &:focus-visible {
+    outline: none;
+    color: white;
+    font-weight: 900;
+    background: #dd1188;
+    box-shadow: 0 0 0 4px #dd1188;
+    border-radius: 9999px;
+    border: 2px dashed currentcolor;
+
+    html.darkmode & {
+      background: yellow;
+      box-shadow: 0 0 0 4px yellow;
+      color: black;
+    }
+  }
+`
 
 export const GlobalStyle = createGlobalStyle`
   @keyframes rotate_clockwise {
@@ -177,54 +215,19 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   a, h1 {
-    &:focus {
-      outline: none;
+    ${FocusCSS}
+
+    &[data-focus-visible-added] {
+      padding: 0 10px;
     }
 
     &:focus-visible {
-      outline: none;
-      color: white;
-      font-weight: 900;
-      background: #dd1188;
-      box-shadow: 0 0 0 4px #dd1188;
-      border-radius: 9999px;
-      border: 2px dashed currentcolor;
       padding: 0 10px;
-
-      &:has(svg) {
-        min-height: 44px;
-        min-width: 44px;
-      }
-
-      html.darkmode & {
-        background: yellow;
-        box-shadow: 0 0 0 4px yellow;
-        color: black;
-      }
     }
   }
 
   button {
-    &:focus-visible {
-      outline: none;
-      color: white;
-      font-weight: 900;
-      background: #dd1188;
-      box-shadow: 0 0 0 4px #dd1188;
-      border-radius: 9999px;
-      border: 2px dashed currentcolor;
-
-      &:has(svg) {
-        min-height: 44px;
-        min-width: 44px;
-      }
-
-      html.darkmode & {
-        background: yellow;
-        box-shadow: 0 0 0 4px yellow;
-        color: black;
-      }
-    }
+    ${FocusCSS}
   }
 
 

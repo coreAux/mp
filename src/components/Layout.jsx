@@ -1,6 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 
+import useCookieConsent from "../hooks/useCookieConsent"
+
 import { GlobalStyle, smallBreakPoint } from "../styles"
 import Contexts from "./Contexts"
 import Modal from "./Modal"
@@ -24,8 +26,8 @@ const Main = styled.main`
 `
 
 const Layout = ({ children, ...props }) => {
-
-  // console.log("props: ", props)
+  const { denyCookie } = useCookieConsent()
+  console.log("denyCookie: ", denyCookie)
 
   const childrenWithProps = React.Children.map(children, child => {
     if (React.isValidElement(child)) {
