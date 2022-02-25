@@ -64,7 +64,7 @@ const Hero = () => {
         >
           <StyledGatsbyImage style={{margin: "24px",gridArea: "1 / 1 / auto / auto"}} image={image} alt="Mickey" />
 
-            <StyledSvg id="test" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
+            <StyledSvg id="test" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" >
               <defs>
                 <clipPath id="clipPath">
                 <path id="MyPath" d="M15,170

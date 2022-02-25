@@ -4,6 +4,8 @@ import { Transition } from "react-transition-group"
 import styled, { css } from "styled-components"
 import { smallBreakPoint, RoundButton } from "../styles"
 
+import useHideForModal from "../hooks/useHideForModal"
+
 import ToggleDarkmode from "./ToggleDarkmode"
 import ToggleContrast from "./ToggleContrast"
 
@@ -270,6 +272,7 @@ const Nav = () => {
   const [openNav, setOpenNav] = useState(true)
   const [darkmode, setDarkmode] = useState(false)
   const [contrastmode, setContrastmode] = useState(false)
+  const hideForModal = useHideForModal()
 
   const toggleDarkmode = (event) => {
     if (event.key === "Tab" || event.key === "Shift") {
@@ -394,21 +397,20 @@ const Nav = () => {
                       navigate("/")
                       toggleNavOnSmallDevice()
                     }}
-                    focusable={true}
                     role="link"
                     aria-label="Home"
-                    tabIndex={0}
+                    tabIndex={hideForModal}
                   >
-                    MICKEY
+                    Mickey
                   </H1>
-                  <StyledLink to="/about/" activeClassName="active" onClick={toggleNavOnSmallDevice}>
+                  <StyledLink to="/about/" activeClassName="active" onClick={toggleNavOnSmallDevice} tabIndex={hideForModal}>
                     About
                   </StyledLink>
                   {process.env.NODE_ENV === "development" && <StyledLink to="/" activeClassName="n-active"
-                    onClick={toggleNavOnSmallDevice}>
+                    onClick={toggleNavOnSmallDevice} tabIndex={hideForModal}>
                     Work
                   </StyledLink>}
-                  {process.env.NODE_ENV === "development" && <StyledLink to="/blog/" activeClassName="active" partiallyActive={true} onClick={toggleNavOnSmallDevice}>
+                  {process.env.NODE_ENV === "development" && <StyledLink to="/blog/" activeClassName="active" partiallyActive={true} onClick={toggleNavOnSmallDevice} tabIndex={hideForModal} >
                     Blog
                   </StyledLink>}
                 </MenuWrapper>
@@ -416,10 +418,12 @@ const Nav = () => {
                   <ToggleContrast
                     onClick={toggleContrastmode}
                     contrastmode={contrastmode}
+                    tabIndex={hideForModal}
                   />
                   <ToggleDarkmode
                     onClick={toggleDarkmode}
                     darkmode={darkmode}
+                    tabIndex={hideForModal}
                   />
               </ToggleWrapper>
               </Menu>
@@ -432,6 +436,7 @@ const Nav = () => {
           aria-label="Toggle navigation menu"
           $openNav={openNav}
           onClick={() => setOpenNav(!openNav)}
+          tabIndex={hideForModal}
         >
           <Hamburger $openNav={openNav} />
         </Button>

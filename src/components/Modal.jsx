@@ -152,6 +152,7 @@ const Modal = () => {
 
           <ModalCard
             $state={state}
+            aria-modal="true"
           >
             {modalComponent}
           </ModalCard>

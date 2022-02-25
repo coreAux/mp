@@ -92,10 +92,19 @@ const AboutPage = ({ data }) => {
           <p>React Roundup ep. 98 - Couroom to webgl</p>
 </Content>
 <Content>
-          <h1>Links</h1>
+          <h1>Links and resources</h1>
           <p>
             Here are some links... bla bla bla...
           </p>
+
+          <dl>
+            <dt><a href="https://a11y-101.com/" rel="noopener">a11y-101.com</a></dt>
+            <dd>A good start if you&apos; interested in accessible webdevelopment.</dd>
+
+            <dt><a href="https://a11y-101.com/" rel="noopener">a11y-101.com</a></dt>
+            <dd>A good start if you&apos; interested in accessible webdevelopment.</dd>
+          </dl>
+
           </Content>
 
 

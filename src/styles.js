@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   :root {
     /* SHARED VARS */
     --color-alpha: 1;
-    --primary-color: #2ec990;
+    --primary-color: #27AA7A; //#2ec990;
     --primary-color-hsl: 158deg 63% 48%;
     --secondary-color: #f64060;
     --secondary-color-hsl: 349deg 91% 61%;
@@ -43,10 +43,10 @@ export const GlobalStyle = createGlobalStyle`
     --padding: 10px;
 
     /* LIGHT VARS */
-    --white: #f1f0f5;
+    --white: hsl(var(--white-hsl)); //#f1f0f5;
     --white-hsl: 252deg 20% 95%;
     --footer-bg-color: var(--black);
-    --black: #111015;
+    --black: hsl(var(--black-hsl)); // #111015;
     // --black-hsl: 252deg 14% 7%;
     --black-hsl: 200deg 11% 9%;
     --letter-spacing: 0px;
@@ -57,16 +57,17 @@ export const GlobalStyle = createGlobalStyle`
     color-scheme: light;
 
     &.contrastmode {
-      --primary-color: #00aa50 /*#157854*/;
+      --primary-color: #0000ff; //#00aa50 /*#157854*/;
     }
 
     /* DARK VARS */
     &.darkmode {
-      --white: #111015;
+      --primary-color: #2ec990;
+      --white: hsl(var(--white-hsl)); // #111015;
       // --white-hsl: 252deg 14% 7%;
       --white-hsl: 200deg 11% 9%;
       --footer-bg-color: var(--black);
-      --black: #f1f0f5;
+      --black: hsl(var(--black-hsl)); //#f1f0f5;
       --black-hsl: 252deg 20% 95%;
       --letter-spacing: .5px;
       --letter-spacing-inverted: 0px;
@@ -175,10 +176,62 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 24px;
   }
 
+  a, h1 {
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: none;
+      color: white;
+      font-weight: 900;
+      background: #dd1188;
+      box-shadow: 0 0 0 4px #dd1188;
+      border-radius: 9999px;
+      border: 2px dashed currentcolor;
+      padding: 0 10px;
+
+      &:has(svg) {
+        min-height: 44px;
+        min-width: 44px;
+      }
+
+      html.darkmode & {
+        background: yellow;
+        box-shadow: 0 0 0 4px yellow;
+        color: black;
+      }
+    }
+  }
+
+  button {
+    &:focus-visible {
+      outline: none;
+      color: white;
+      font-weight: 900;
+      background: #dd1188;
+      box-shadow: 0 0 0 4px #dd1188;
+      border-radius: 9999px;
+      border: 2px dashed currentcolor;
+
+      &:has(svg) {
+        min-height: 44px;
+        min-width: 44px;
+      }
+
+      html.darkmode & {
+        background: yellow;
+        box-shadow: 0 0 0 4px yellow;
+        color: black;
+      }
+    }
+  }
+
+
   main a {
     position: relative;
     color: var(--primary-color);
-    text-decoration: none;
+    text-decoration: var(--main-link-underline);
 
     &::after {
       content: "";
@@ -230,6 +283,76 @@ export const GlobalStyle = createGlobalStyle`
         background-color: hsl(var(--primary-color) / .2);
       }
     }
+
+    /*
+    * The code below creates underline style for links
+    * when contrast mode is on to provide better legbility
+    * Consider isolate into a separate CSS const.
+    */
+    html.contrastmode & {
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: -1px;
+        border-radius: 9999px;
+        left: 0;
+        background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
+        background-position: 100% 100%;
+        background-repeat: no-repeat;
+        background-size: 200% 100%;
+        transition: none;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: -1px;
+        border-radius: 9999px;
+        left: 0;
+        background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
+        background-position: 100% 100%;
+        background-repeat: no-repeat;
+        background-size: 200% 100%;
+        transition: background-position .2s;
+      }
+
+      @media (hover) {
+        &:hover {
+          &::after {
+            background-position: 0% 100%;
+            transition: background-position .2s;
+          }
+
+          &::before {
+            background-image: linear-gradient(90deg, var(--primary-color) 50%, transparent 50%);
+            background-position: 0% 100%;
+            transition: background-position .2s .2s;
+          }
+        }
+      }
+    }
+
+    @media (max-width: ${smallBreakPoint}px) {
+      margin-top: 10px;
+      font-family: Roboto, sans-serif;
+      font-size: 48px;
+
+      &.active {
+        color: var(--primary-color);
+      }
+    }
+
+
+
+
+
+
+
+
   }
 
   p + p {

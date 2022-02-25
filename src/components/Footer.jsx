@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import styled, { css } from "styled-components"
 import { Button, smallBreakPoint } from "../styles"
 import { ModalContext } from "./Contexts"
+import useHideForModal from "../hooks/usehideForModal"
 
 import InstagramIcon from "../svgs/InstagramIcon"
 import LinkedInIcon from "../svgs/LinkedInIcon"
@@ -134,6 +135,11 @@ const IconLink = styled.a`
       }
     }
   }
+
+  &:focus-visible {
+    width: 44px;
+    height: 44px;
+  }
 `
 
 const StyledButton = styled(Button)`
@@ -153,7 +159,7 @@ const StyledButton = styled(Button)`
 `
 
 const FooterWrapper = styled.div`
-  height: 40px;
+  min-height: 40px;
   position: sticky;
   top: 100%;
   display: flex;
@@ -165,6 +171,7 @@ const FooterWrapper = styled.div`
 
 const Footer = () => {
   const { setModalOpen, setModalComponent } = useContext(ModalContext)
+  const hideForModal = useHideForModal()
 
   return (
     <FooterWrapper>
@@ -185,8 +192,10 @@ const Footer = () => {
             setModalComponent(<ContactComponent/>)
             setModalOpen(true)
           }}
+          aria-label="Open message module"
+          tabIndex={hideForModal}
         >
-          <StyledMessageIcon />
+          <StyledMessageIcon focusable={false}/>
         </StyledButton>
       </div>
 
@@ -214,8 +223,8 @@ const Footer = () => {
               padding: "0 10px",
             }}
           >
-            <div style={{ fontFamily: "Roboto, sans-serif", color: "hsla(var(--white-hsl) / 25%)" }}>
-              &copy; 2022 MICKEY
+            <div style={{ fontFamily: "Roboto, sans-serif", color: "hsla(var(--white-hsl) / 25%)", textTransform: "uppercase" }}>
+              &copy; 2022 Mickey
             </div>
             <div
               style={{
@@ -224,16 +233,16 @@ const Footer = () => {
                 justifyContent: "flex-end",
               }}
             >
-              <IconLink href="https://www.twitter.com/hejmikael" target="_blank" rel="noreferrer" aria-label="Link to Twitter">
+              <IconLink href="https://www.twitter.com/hejmikael" target="_blank" rel="noreferrer" aria-label="Link to Twitter" tabIndex={hideForModal}>
                 <StyledTwitterIcon />
               </IconLink>
-              <IconLink href="https://www=.github.com/coreAux" target="_blank" rel="noreferrer" aria-label="Link to GitHub">
+              <IconLink href="https://www=.github.com/coreAux" target="_blank" rel="noreferrer" aria-label="Link to GitHub" tabIndex={hideForModal}>
                 <StyledGitHubIcon />
               </IconLink>
-              <IconLink href="https://www.instagram.com/hejmikael" target="_blank" rel="noreferrer" aria-label="Link to Instagram">
+              <IconLink href="https://www.instagram.com/hejmikael" target="_blank" rel="noreferrer" aria-label="Link to Instagram" tabIndex={hideForModal}>
                 <StyledInstagramIcon />
               </IconLink>
-              <IconLink href="https://www.linkedin.com/in/petersenmikael" target="_blank" rel="noreferrer" aria-label="Link to LinkedIn">
+              <IconLink href="https://www.linkedin.com/in/petersenmikael" target="_blank" rel="noreferrer" aria-label="Link to LinkedIn" tabIndex={hideForModal}>
                 <StyledLinkedInIcon />
               </IconLink>
             </div>

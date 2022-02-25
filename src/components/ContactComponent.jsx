@@ -332,6 +332,7 @@ const ContactComponent = () => {
                 {({ isValid, isSubmitting}) => (
                   <StyledForm>
                     <InputComponent
+                      autoFocus
                       name="name"
                       type="text"
                       label="Name"
