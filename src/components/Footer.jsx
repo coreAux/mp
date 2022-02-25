@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import styled, { css } from "styled-components"
 import { Button, smallBreakPoint } from "../styles"
 import { ModalContext } from "./Contexts"
-import useHideForModal from "../hooks/usehideForModal"
+import useHideForModal from "../hooks/useHideForModal"
 
 import InstagramIcon from "../svgs/InstagramIcon"
 import LinkedInIcon from "../svgs/LinkedInIcon"
