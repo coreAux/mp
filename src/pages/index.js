@@ -6,6 +6,7 @@ import useCookieConsent from "../hooks/useCookieConsent"
 
 import SEOComponent from "../components/SEOComponent"
 import Hero from "../components/Hero"
+import Button from "../components/ui/Button"
 
 const testArr = [0,1,2,3,4,5,6,7,8,9,10]
 
@@ -45,7 +46,7 @@ const IndexPage = () => {
       />
       <Hero />
       <SafeArea>
-        <h1>Mickey / Header 1</h1>
+        <h2>Mickey / Header 1</h2>
         <p>
           <Emoji role="img" aria-label="Party Face">🥳</Emoji>
           Mickey is a front end ninja who’s been fidgeting with <code>HTML</code>, <code>CSS</code>, and <code>JavaScript</code> since the days when layouts were made with <code>iframe</code>-tags and the <code>marquee</code>-tag was the coolest thing on the Internet.
@@ -57,25 +58,25 @@ const IndexPage = () => {
       <SafeArea>
         <Kard style={{ alignItems: "flex-start" }}>
           <Borre $mdSpan={4} >
-            <h1>Principles / Beliefs / Values</h1>
+            <h2>Principles / Beliefs / Values</h2>
           </Borre>
           <Borre $mdSpan={4} >
-            <h2>{"Style, function, personality"}</h2>
+            <h3>{"Style, function, personality"}</h3>
             <p>I love creating unique and personal websites, just like back in the &rsquo;90s</p>
           </Borre>
           <Borre $mdSpan={4} >
-            <h2>Devil is in the details</h2>
+            <h3>Devil is in the details</h3>
             <p>The importance of details can&apos;t be underestimated, with a keen eye for detail I make sure that your product delivers on all fronts.</p>
           </Borre>
           <Borre $mdSpan={4} >
             {/*<h1>Principles / Beliefs / Values</h1>*/}
           </Borre>
           <Borre $mdSpan={4} >
-            <h2>{"Pixel perfection"}</h2>
+            <h3>{"Pixel perfection"}</h3>
             <p>I love creating unique and personal websites, just like back in the &rsquo;90s</p>
           </Borre>
           <Borre $mdSpan={4} >
-            <h2>The internet is for everyone</h2>
+            <h3>The internet is for everyone</h3>
             <p>It&apos;s a strong belief of mine that the internet should be accessible for anyone, and everyone. Creating accessible sites is ...</p>
           </Borre>
         </Kard>
@@ -84,19 +85,23 @@ const IndexPage = () => {
         {testArr.slice(0,splice).map((t) => (
           <p key={t}>{t}</p>
         ))}
-        <button
+        <Button
           onClick={() => setSplice(splice => splice + 1)}
-        >
-          Show more!
-        </button>
+          label="Show more!"
+          aria-disabled={true}
+          disabled={true}
+        />
       </SafeArea>
       <SafeArea>
-        {process.env.NODE_ENV !== "development" && <><button
-          onClick={() => grantCookie()}
-        >Consent to cookies</button>
-        <button
-          onClick={() => denyCookie()}
-        >Reject cookies</button></>}
+        {process.env.NODE_ENV !== "development" && <>
+          <Button
+            onClick={() => grantCookie()}
+            label="Consent to cookies"
+          />
+          <Button
+            onClick={() => denyCookie()}
+            label="Reject cookies"
+          /></>}
       </SafeArea>
     </>
   )

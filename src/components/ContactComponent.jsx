@@ -65,8 +65,13 @@ const InputComponent = ({ label, ...props}) => {
   return (
     <Label>
       <LabelSpan $move={!!field.value}>{label}</LabelSpan>
-      <Input $error={meta.touched && meta.error} {...field} {...props} />
-      {meta.touched && meta.error && <Error>{meta.error}</Error>}
+      <Input
+        $error={meta.touched && meta.error}
+        aria-describedby={`${field.name}-hint`}
+        {...field}
+        {...props}
+      />
+    {meta.touched && meta.error && <Error id={`${field.name}-hint`}>{meta.error}</Error>}
     </Label>
   )
 }
@@ -117,9 +122,15 @@ const TextAreaComponent = ({ label, ...props}) => {
     <Label>
       <LabelSpan $move={!!field.value}>{label}</LabelSpan>
       <TextAreaWrapper ref={grower}>
-        <TextArea rows="1" $error={meta.touched && meta.error} {...field} {...props} />
+        <TextArea
+          rows="1"
+          $error={meta.touched && meta.error}
+          aria-describedby={`${field.name}-hint`}
+          {...field}
+          {...props}
+        />
       </TextAreaWrapper>
-      {meta.touched && meta.error && <Error>{meta.error}</Error>}
+      {meta.touched && meta.error && <Error aria-describedby={`${field.name}-hint`}>{meta.error}</Error>}
     </Label>
   )
 }
@@ -356,7 +367,7 @@ const ContactComponent = () => {
                     <SendButton
                       type="submit"
                       style={{width:"150px"}}
-                      disabled={!isValid || isSubmitting}
+                      aria-disabled={!isValid || isSubmitting}
                     >
                       {sendButtonText}
                     </SendButton>

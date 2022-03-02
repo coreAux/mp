@@ -382,16 +382,19 @@ export const Button = styled.button`
   padding: 4px 8px;
   border-radius: 9999px;
 
-  &:disabled {
+  &:disabled,
+  &[aria-disabled="true"] {
     background: hsl(var(--black-hsl) / .2);
     color: hsl(var(--black-hsl) / .2);
   }
 
   @media (hover) {
-    &:hover:not(:disabled) {
+    &[aria-disabled="false"]:hover,
+    &:hover:not(:disabled), {
       background: var(--primary-color);
     }
 
+    &[aria-disabled="true"]:hover,
     &:hover:disabled {
       cursor: not-allowed;
     }

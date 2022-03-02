@@ -144,12 +144,18 @@ const ToggleWrapper = styled.div`
   }
 `
 
-const H1 = styled.h1`
+const H1 = styled.span`
+  display: flex;
+  font-family: "Roboto",sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1;
   font-size: 24px;
   cursor: pointer;
 
   @media (max-width: ${smallBreakPoint}px) {
     font-size: 48px;
+    display: unset;
   }
 `
 
@@ -264,6 +270,14 @@ const StyledLink = styled(Link)`
 
     &.active {
       color: var(--primary-color);
+
+      &::before {
+        display: none;
+      }
+
+      &::after {
+        display: none;
+      }
     }
   }
 `

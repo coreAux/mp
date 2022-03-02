@@ -6,6 +6,7 @@ import { SafeArea, Kard, smallBreakPoint } from "../styles"
 
 import randomInt from "../utils/randomInt"
 
+import A from "../components/A"
 import SEOComponent from "../components/SEOComponent"
 
 const StyledGatsbyImage = styled(GatsbyImage)`
@@ -75,7 +76,7 @@ const AboutPage = ({ data }) => {
             />
           </div>
             <h1>About Mickey</h1>
-            <p><a href="https://www.twitter.com/hejmikael" target="_blank" rel="noreferrer">Twitter</a></p>
+            <p><A href="https://www.twitter.com/hejmikael" rel="noopener" label="Twitter" /></p>
             <p>
               Hi! My name is Mickey and I enjoy making interactive and colorful websites <span role="img" aria-label="Laptop">💻</span>.
             </p>
@@ -98,13 +99,12 @@ const AboutPage = ({ data }) => {
           </p>
 
           <dl>
-            <dt><a href="https://a11y-101.com/" rel="noopener">a11y-101.com</a></dt>
+            <dt><A href="https://a11y-101.com/" rel="noopener" label="a11y-101.com" /></dt>
             <dd>A good start if you&apos; interested in accessible webdevelopment.</dd>
 
-            <dt><a href="https://a11y-101.com/" rel="noopener">a11y-101.com</a></dt>
+            <dt><A href="https://a11y-101.com/" rel="noopener" label="a11y-101.com" /></dt>
             <dd>A good start if you&apos; interested in accessible webdevelopment.</dd>
           </dl>
-
           </Content>
 
 
