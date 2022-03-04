@@ -1,7 +1,10 @@
-import styled, { css, createGlobalStyle } from "styled-components"
+import styled, { keyframes, css, createGlobalStyle } from "styled-components"
 import MickeyLogo from "./images/logo_mickey.svg"
 import MickeyLogoDarkmode from "./images/logo_mickey_darkmode.svg"
-export const smallBreakPoint = "700"
+
+export const smallBreakPoint = "640"
+export const mediumBreakPoint = "768"
+export const largeBreakPoint = "1024"
 
 const FocusCSS = css`
   &:focus {
@@ -41,17 +44,20 @@ const FocusCSS = css`
   }
 `
 
-export const GlobalStyle = createGlobalStyle`
-  @keyframes rotate_clockwise {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+export const rotateClockwise = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`
 
+export const GlobalStyle = createGlobalStyle`
   :root {
     /* SHARED VARS */
     --color-alpha: 1;
-    --primary-color: #27AA7A; //#2ec990;
-    --primary-color-hsl: 158deg 63% 48%;
+    --primary-color-hsl: 330deg 100% 71%;
+    --primary-color: hsl(var(--primary-color-hsl)); // #27AA7A; //#2ec990;
+    --primary-color-reverse-hsl: 162deg 100% 70%;
+    --primary-color-reverse: hsl(var(--primary-color-reverse-hsl));
+    // --primary-color-hsl: 158deg 63% 48%;
     --secondary-color: #f64060;
     --secondary-color-hsl: 349deg 91% 61%;
     --border-radius: 10px;
@@ -96,14 +102,19 @@ export const GlobalStyle = createGlobalStyle`
 
     &.contrastmode {
       --primary-color: #0000ff; //#00aa50 /*#157854*/;
+      --primary-color-reverse-hsl: 60deg 100% 50%;
+      --primary-color-reverse: hsl(var(--primary-color-reverse-hsl));
     }
 
     /* DARK VARS */
     &.darkmode {
-      --primary-color: #2ec990;
+      --primary-color: #64ffd0; //#2ec990;
+      --primary-color-reverse-hsl: 330deg 100% 71%; //158deg 63% 41%;
+      --primary-color-reverse: hsl(var(--primary-color-reverse-hsl));
       --white: hsl(var(--white-hsl)); // #111015;
       // --white-hsl: 252deg 14% 7%;
-      --white-hsl: 200deg 11% 9%;
+      // --white-hsl: 200deg 11% 9%;
+      --white-hsl: 240deg 14% 7%;
       --footer-bg-color: var(--black);
       --black: hsl(var(--black-hsl)); //#f1f0f5;
       --black-hsl: 252deg 20% 95%;
@@ -116,7 +127,9 @@ export const GlobalStyle = createGlobalStyle`
       color-scheme: dark;
 
       &.contrastmode {
-        --primary-color: #64FFD0;
+        --primary-color: #ffff00; //#64FFD0;
+        --primary-color-reverse-hsl: 240deg 100% 50%;
+        --primary-color-reverse: hsl(var(--primary-color-reverse-hsl));
       }
     }
 
@@ -154,14 +167,16 @@ export const GlobalStyle = createGlobalStyle`
     background: url(${MickeyLogo}) 50% 50% / 80% 100% fixed no-repeat, linear-gradient(0deg, var(--white), var(--white));
 
     @media (max-width: ${smallBreakPoint}px) {
-      background: url(${MickeyLogo}) 10% 10% / 10% 2%, linear-gradient(0deg, var(--white), var(--white));
+      // background: url(${MickeyLogo}) 10% 10% / 10% 2%, linear-gradient(0deg, var(--white), var(--white));
+      background: url(${MickeyLogo}) 52px 52px / 52px 26px, url(${MickeyLogo}) 26px 13px / 52px 26px, linear-gradient(0deg, var(--white), var(--white));
     }
 
     .darkmode & {
       background: url(${MickeyLogoDarkmode}) 50% 50% / 80% 100% fixed no-repeat, linear-gradient(0deg, var(--white), var(--white));
 
       @media (max-width: ${smallBreakPoint}px) {
-        background: url(${MickeyLogoDarkmode}) 10% 10% / 10% 2%, linear-gradient(0deg, var(--white), var(--white));
+        // background: url(${MickeyLogoDarkmode}) 10% 10% / 10% 2%, linear-gradient(0deg, var(--white), var(--white));
+        background: url(${MickeyLogoDarkmode}) 52px 52px / 52px 26px, url(${MickeyLogoDarkmode}) 26px 13px / 52px 26px, linear-gradient(0deg, var(--white), var(--white));
       }
     }
 
@@ -381,6 +396,12 @@ export const Button = styled.button`
   background: ${({$invert, $secondary}) => $invert || $secondary ? "var(--white)" : "var(--black)"};
   padding: 4px 8px;
   border-radius: 9999px;
+
+  @media (hover) {
+    &:hover {
+      background: var(--primary-color);
+    }
+  }
 
   &:disabled,
   &[aria-disabled="true"] {

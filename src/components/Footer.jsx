@@ -8,8 +8,8 @@ import InstagramIcon from "../svgs/InstagramIcon"
 import LinkedInIcon from "../svgs/LinkedInIcon"
 import TwitterIcon from "../svgs/TwitterIcon"
 import GitHubIcon from "../svgs/GitHubIcon"
-import MickeyIcon from "../svgs/MickeyIcon"
 import MessageIcon from "../svgs/MessageIcon"
+import Logo from "./Logo"
 
 import ContactComponent from "./ContactComponent"
 
@@ -75,8 +75,8 @@ const IconCSS = css`
 
   & > polyline,
   & > polygon {
-    fill: none;
-    stroke: var(--white);
+    fill: white;
+    stroke: #555;
     stroke-width: 20px;
   }
 `
@@ -102,20 +102,6 @@ const StyledMessageIcon = styled(MessageIcon)`
   ${IconCSS}
 `
 
-const StyledMickeyIcon = styled(MickeyIcon)`
-  // width: 50px;
-  // height: 50px;
-  width: 40px;
-  height: 40px;
-  // margin-left: 20px;
-  transition: none;
-
-  &:hover {
-    transform: rotate(360deg);
-    transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-`
-
 const IconLink = styled.a`
   width: 38px;
   height: 38px;
@@ -128,10 +114,10 @@ const IconLink = styled.a`
 
   @media (hover) {
     &:hover {
-      background: hsl(var(--primary-color-hsl) / .2);
+      background: hsl(var(--primary-color-reverse-hsl) / .2);
 
       & > svg > path {
-        fill: var(--primary-color);
+        fill: var(--primary-color-reverse);
       }
     }
   }
@@ -153,14 +139,6 @@ const StyledButton = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  @media (hover ) {
-    &:hover > svg > polygon,
-    &:hover > svg > polyline {
-      fill: var(--black);
-      stroke: var(--white);
-    }
-  }
 `
 
 const FooterWrapper = styled.div`
@@ -200,7 +178,7 @@ const Footer = () => {
           aria-label="Open message module"
           tabIndex={hideForModal}
         >
-          <StyledMessageIcon focusable={false}/>
+          <StyledMessageIcon />
         </StyledButton>
       </div>
 
@@ -228,7 +206,7 @@ const Footer = () => {
               padding: "0 10px",
             }}
           >
-            <div style={{ fontFamily: "Roboto, sans-serif", color: "hsla(var(--white-hsl) / 25%)", textTransform: "uppercase" }}>
+            <div style={{ fontFamily: "Roboto, sans-serif", letterSpacing: "var(--letter-spacing-inverted)", color: "hsla(var(--white-hsl) / 25%)", textTransform: "uppercase" }}>
               &copy; 2022 Mickey
             </div>
             <div
@@ -284,11 +262,43 @@ const Footer = () => {
           <p>Example</p>
         </div>*/}
       </StyledFooter>
-      <div style={{ width: "40px" }}>
-        <StyledMickeyIcon />
-      </div>
+      <Logo rotate={true} />
     </FooterWrapper>
   )
 }
 
 export default Footer
+
+
+/*
+
+
+
+onMouseEnter={() => {
+  // if (logoRef.current) {
+  //   logoRef.current.style.transition = "transform 1s cubic-bezier(0.34, 1.56, 0.64, 1)"
+  //   logoRef.current.style.transform = "rotate(360deg)"
+  //
+  //   setTimeout(() => {
+  //     logoRef.current.style.transition = "none"
+  //     logoRef.current.style.transform = "rotate(0deg)"
+  //   }, 1000)
+  // }
+  // transition: none;
+  //
+  // &:hover {
+  //   transform: rotate(360deg);
+  //   transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  // }
+
+  // e.currentTarget.style.transform = "rotate(360deg)"
+  // console.log("In: ", e.currentTarget)
+  //
+  // setTimeout(() => {
+  //   console.log("e.currentTarget", e.currentTarget)
+  //   console.log("e.target", e.target)
+    // e.currentTarget.style.transform = ""
+  // }, 1000)
+}}
+
+*/

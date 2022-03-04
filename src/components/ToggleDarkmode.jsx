@@ -41,7 +41,7 @@ const Beam = styled.div`
   top: 50%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0) rotate(${({$state, $b}) => $state === "entered" ? (360 / beams.length) * $b : (-360 / beams.length) * $b}deg) ${({$state}) => $state === "entered" ? "translate3d(0, 10px, 0)" : "translate3d(0, 0, 0)"};
-  transition: transform .3s;
+  transition: transform 1s .3s;
 
   @media (max-width: ${smallBreakPoint}px) {
     background: var(--black);

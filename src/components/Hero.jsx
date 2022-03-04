@@ -1,14 +1,16 @@
-import React from "react"
+import React, { useContext } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { getImage, GatsbyImage } from "gatsby-plugin-image"
 import styled from "styled-components"
-import { SafeArea, Kard, Borre } from "../styles"
+import { SafeArea, Kard, Borre, rotateClockwise } from "../styles"
+
+import { DarkmodeContext } from "./Contexts"
 
 const StyledGatsbyImage = styled(GatsbyImage)`
   isolation: isolate;
   border-radius: 9999px;
   border: 10px solid white;
-  // filter: brightness(1.25);
+  transition: opacity .3s;
 `
 
 const StyledSafeArea = styled(SafeArea)`
@@ -25,19 +27,34 @@ const StyledSvg = styled.svg`
   text-transform: uppercase;
   z-index: 2;
   fill: var(--black);
-  animation: rotate_clockwise infinite linear 120s;
+  animation: ${rotateClockwise} infinite linear 120s;
+  position: absolute;
+  top: 0;
+  left: 0;
 `
 
 const Hero = () => {
+  const { darkmode, delayedDarkmode } = useContext(DarkmodeContext)
   const data = useStaticQuery(graphql`
     query hero_image {
       imageSharp(original: {src: {regex: "/mickey_hero/"}}) {
         gatsbyImageData(width: 400)
       }
+      allImageSharp(
+        filter: {parent: {internal: {description: {regex: "/\\/images/hero\\//"}}}}
+      ) {
+        edges {
+          node {
+            id
+            gatsbyImageData(aspectRatio: 1, width: 400)
+          }
+        }
+      }
     }
   `)
   /* , transformOptions: {duotone: {highlight: "#ffffff", shadow: "#000000"}} */
   const image = getImage(data.imageSharp.gatsbyImageData)
+  const images = data.allImageSharp.edges.map((e) => e.node)
 
   return (
     <StyledSafeArea>
@@ -58,11 +75,35 @@ const Hero = () => {
           style={{
             justifySelf: "center",
             display: "grid",
-            placeItems: "center"
+            placeItems: "center",
+            position: "relative",
+            overflow: "hidden",
           }}
 
         >
-          <StyledGatsbyImage style={{margin: "24px",gridArea: "1 / 1 / auto / auto"}} image={image} alt="Mickey" />
+          {/*<StyledGatsbyImage style={{margin: "24px",gridArea: "1 / 1 / auto / auto"}} image={image} alt="Mickey" />*/}
+          {delayedDarkmode && images[0] &&
+            <StyledGatsbyImage
+              key={images[0].id}
+              style={{
+                margin: "24px",
+                gridArea: "1 / 1 / auto / auto",
+              }}
+              image={getImage(images[0].gatsbyImageData)}
+              alt="Mickey"
+            />
+          }
+          {!delayedDarkmode && images[1] &&
+            <StyledGatsbyImage
+              key={images[1].id}
+              style={{
+                margin: "24px",
+                gridArea: "1 / 1 / auto / auto",
+              }}
+              image={getImage(images[1].gatsbyImageData)}
+              alt="Mickey"
+            />
+          }
 
             <StyledSvg id="test" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" >
               <defs>

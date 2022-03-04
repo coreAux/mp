@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { Link } from "gatsby"
 import { Transition } from "react-transition-group"
 import styled, { css } from "styled-components"
 import { smallBreakPoint, RoundButton } from "../styles"
 
 import useHideForModal from "../hooks/useHideForModal"
+
+import { DarkmodeContext, ContrastmodeContext } from "./Contexts"
 
 import ToggleDarkmode from "./ToggleDarkmode"
 import ToggleContrast from "./ToggleContrast"
@@ -173,7 +175,7 @@ const StyledLink = styled(Link)`
     bottom: -1px;
     border-radius: 9999px;
     left: 0;
-    background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
+    background-image: linear-gradient(90deg, transparent 50%, var(--primary-color-reverse) 50%);
     background-position: 200% 100%;
     background-repeat: no-repeat;
     background-size: 200% 100%;
@@ -188,7 +190,7 @@ const StyledLink = styled(Link)`
     bottom: -1px;
     border-radius: 9999px;
     left: 0;
-    background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
+    background-image: linear-gradient(90deg, transparent 50%, var(--primary-color-reverse) 50%);
     background-position: 0% 100%;
     background-repeat: no-repeat;
     background-size: 200% 100%;
@@ -198,13 +200,13 @@ const StyledLink = styled(Link)`
   @media (hover) {
     &:hover {
       &::after {
-        background-position: 100% 100%;
+        background-position-x: 100% 100%;
         transition: background-position .2s;
       }
 
       &::before {
         background-image: linear-gradient(90deg, transparent 50%, transparent 50%);
-        background-position: 100% 100%;
+        background-position-x: 100% 100%;
         transition: none;
       }
     }
@@ -212,7 +214,7 @@ const StyledLink = styled(Link)`
 
   @media (hover: none) {
     &:active {
-      background-color: hsl(var(--primary-color) / .2);
+      background-color: hsl(var(--primary-color-reverse) / .2);
     }
   }
 
@@ -225,7 +227,7 @@ const StyledLink = styled(Link)`
       bottom: -1px;
       border-radius: 9999px;
       left: 0;
-      background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
+      background-image: linear-gradient(90deg, transparent 50%, var(--primary-color-reverse) 50%);
       background-position: 100% 100%;
       background-repeat: no-repeat;
       background-size: 200% 100%;
@@ -240,7 +242,7 @@ const StyledLink = styled(Link)`
       bottom: -1px;
       border-radius: 9999px;
       left: 0;
-      background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
+      background-image: linear-gradient(90deg, transparent 50%, var(--primary-color-reverse) 50%);
       background-position: 100% 100%;
       background-repeat: no-repeat;
       background-size: 200% 100%;
@@ -255,7 +257,7 @@ const StyledLink = styled(Link)`
         }
 
         &::before {
-          background-image: linear-gradient(90deg, var(--primary-color) 50%, transparent 50%);
+          background-image: linear-gradient(90deg, var(--primary-color-reverse) 50%, transparent 50%);
           background-position: 0% 100%;
           transition: background-position .2s .2s;
         }
@@ -267,6 +269,16 @@ const StyledLink = styled(Link)`
     margin-top: 10px;
     font-family: Roboto, sans-serif;
     font-size: 48px;
+
+    @media (hover) {
+      &::before {
+        background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
+      }
+
+      &::after {
+        background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
+      }
+    }
 
     &.active {
       color: var(--primary-color);
@@ -284,65 +296,9 @@ const StyledLink = styled(Link)`
 
 const Nav = () => {
   const [openNav, setOpenNav] = useState(true)
-  const [darkmode, setDarkmode] = useState(false)
-  const [contrastmode, setContrastmode] = useState(false)
   const hideForModal = useHideForModal()
-
-  const toggleDarkmode = (event) => {
-    if (event.key === "Tab" || event.key === "Shift") {
-      // Avoid anything happening when tabbing...
-    } else {
-      setDarkmode(!darkmode)
-      setTimeout(() => {
-        document.documentElement.classList.toggle("darkmode")
-      }, 300)
-    }
-  }
-
-  const toggleContrastmode = (event) => {
-    if (event.key === "Tab" || event.key === "Shift") {
-      // Avoid anything happening when tabbing...
-    } else {
-      setContrastmode(!contrastmode)
-      document.documentElement.classList.toggle("contrastmode")
-    }
-  }
-
-  useEffect(() => {
-    if (typeof window !== undefined) {
-      if (darkmode) {
-        document.querySelector("meta[name='theme-color']").setAttribute("content","#111015")
-      } else if (!darkmode) {
-        document.querySelector("meta[name='theme-color']").setAttribute("content","#f1f0f5")
-      }
-    }
-  }, [darkmode])
-
-  useEffect(() => {
-    if (typeof window !== undefined) {
-      const initDarkmode = !!window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
-
-      setDarkmode(initDarkmode)
-      if (initDarkmode) {
-        document.documentElement.classList.add("darkmode")
-      } else if (!initDarkmode) {
-        document.documentElement.classList.remove("darkmode")
-      }
-    }
-  }, [])
-
-  useEffect(() => {
-    if (typeof window !== undefined) {
-      const initContrastmode = !!window.matchMedia && window.matchMedia("(prefers-contrast: more)").matches
-
-      setContrastmode(initContrastmode)
-      if (initContrastmode) {
-        document.documentElement.classList.add("contrastmode")
-      } else if (!initContrastmode) {
-        document.documentElement.classList.remove("constrastmode")
-      }
-    }
-  }, [])
+  const { darkmode, toggleDarkmode} = useContext(DarkmodeContext)
+  const { contrastmode, toggleContrastmode } = useContext(ContrastmodeContext)
 
   // Handle scrolling of body when nav is open in small devices
   useEffect(() => {
