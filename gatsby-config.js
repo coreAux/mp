@@ -19,6 +19,7 @@ module.exports = {
      options: {
        trackingIds: [
          "GTM-PXXJN64",
+         // G-69YD8ETXJE
        ],
        // This object gets passed directly to the gtag config command
        // This config will be shared across all trackingIds

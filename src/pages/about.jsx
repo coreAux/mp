@@ -42,13 +42,13 @@ const Pulse = styled.div`
   // height: 430px;
   border: 5px solid var(--primary-color);
   border-radius: ${({$borderRadius}) => `var(--border-radius-${$borderRadius})`};
-  animation: ${radar} 3s ${({$p}) => $p * .5}s infinite alternate ease-out
+  animation: ${radar} 3s ${({$p}) => $p * .5}s infinite alternate ease-out;
 `
 
 const MainGatsbyImage = styled(GatsbyImage)`
   isolation: isolate;
   border-radius: ${({$borderRadius}) => `var(--border-radius-${$borderRadius})`};
-  // border: 5px solid var(--primary-color);
+  border: 5px solid var(--primary-color);
   grid-area: 1 / 1 / auto / auto;
 `
 
@@ -99,14 +99,6 @@ const AboutPage = ({ data }) => {
           ))*/}
           <Content>
           <div style={{ display: "grid", placeItems: "center", marginBottom: "50px", textAlign:"center", position: "relative"}}>
-              {pulses.map((p) => (
-                <Pulse
-                  key={p}
-                  $p={p}
-                  $borderRadius={rndm}
-                />
-              ))}
-              <Pulse />
               <MainGatsbyImage
                 image={image}
                 alt="Mickey"

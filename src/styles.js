@@ -6,41 +6,36 @@ export const smallBreakPoint = "640"
 export const mediumBreakPoint = "768"
 export const largeBreakPoint = "1024"
 
+const ForFocusCSS = css`
+  outline: 2px solid var(--primary-color);
+  outline-offset: 5px;
+  // color: inherit;
+  // font-weight: 900;
+  // background: #dd1188;
+  // box-shadow: 0 0 0 4px #dd1188;
+  // background: var(--primary-color);
+  // box-shadow: 0 0 0 1px var(--primary-color);
+  border-radius: 9999px;
+  // border: 2px dashed currentcolor;
+
+  html.darkmode & {
+    // background: yellow;
+    // box-shadow: 0 0 0 4px yellow;
+    // color: var(--black);
+  }
+`
+
 const FocusCSS = css`
   &:focus {
     outline: none;
   }
 
   &[data-focus-visible-added] {
-    outline: none;
-    color: white;
-    font-weight: 900;
-    background: #dd1188;
-    box-shadow: 0 0 0 4px #dd1188;
-    border-radius: 9999px;
-    border: 2px dashed currentcolor;
-
-    html.darkmode & {
-      background: yellow;
-      box-shadow: 0 0 0 4px yellow;
-      color: black;
-    }
+    ${ForFocusCSS}
   }
 
   &:focus-visible {
-    outline: none;
-    color: white;
-    font-weight: 900;
-    background: #dd1188;
-    box-shadow: 0 0 0 4px #dd1188;
-    border-radius: 9999px;
-    border: 2px dashed currentcolor;
-
-    html.darkmode & {
-      background: yellow;
-      box-shadow: 0 0 0 4px yellow;
-      color: black;
-    }
+    ${ForFocusCSS}
   }
 `
 
@@ -192,7 +187,7 @@ export const GlobalStyle = createGlobalStyle`
 
   img, picture, video, canvas, svg {
     display: block;
-    max-width: 100%;
+    // max-width: 100%;
   }
 
   input, button, textarea, select {
@@ -234,11 +229,11 @@ export const GlobalStyle = createGlobalStyle`
     ${FocusCSS}
 
     &[data-focus-visible-added] {
-      padding: 0 10px;
+      // padding: 0 10px;
     }
 
     &:focus-visible {
-      padding: 0 10px;
+      // padding: 0 10px;
     }
   }
 

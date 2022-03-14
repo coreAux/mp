@@ -12,6 +12,7 @@ import ToggleDarkmode from "./ToggleDarkmode"
 import ToggleContrast from "./ToggleContrast"
 
 const ButtonWrapper = styled.div`
+  --primary-color: var(--primary-color-reverse);
   z-index: 55;
   position: fixed;
   top: calc(20px + env(safe-area-inset-top));
@@ -65,6 +66,7 @@ const Hamburger = styled.div`
 `
 
 const NavWrapper = styled.div`
+  --primary-color: var(--primary-color-reverse);
   z-index: 50;
   position: fixed;
   letter-spacing: var(--letter-spacing-inverted);
@@ -146,8 +148,8 @@ const ToggleWrapper = styled.div`
   }
 `
 
-const H1 = styled.span`
-  display: flex;
+const Span = styled.span`
+  // display: flex;
   font-family: "Roboto",sans-serif;
   font-weight: 900;
   text-transform: uppercase;
@@ -155,10 +157,25 @@ const H1 = styled.span`
   font-size: 24px;
   cursor: pointer;
 
+  transition: color .1s ${({$i}) => $i * .05}s;
+
   @media (max-width: ${smallBreakPoint}px) {
     font-size: 48px;
     display: unset;
   }
+
+  @media (hover) {
+    a:hover & {
+      color: var(--primary-color-reverse);
+    }
+  }
+`
+
+const HomeLink = styled(Link)`
+  text-transform: uppercase;
+  color: inherit;
+  text-decoration: none;
+  display: flex;
 `
 
 const StyledLink = styled(Link)`
@@ -200,13 +217,13 @@ const StyledLink = styled(Link)`
   @media (hover) {
     &:hover {
       &::after {
-        background-position-x: 100% 100%;
+        background-position: 100% 100%;
         transition: background-position .2s;
       }
 
       &::before {
         background-image: linear-gradient(90deg, transparent 50%, transparent 50%);
-        background-position-x: 100% 100%;
+        background-position: 100% 100%;
         transition: none;
       }
     }
@@ -270,6 +287,14 @@ const StyledLink = styled(Link)`
     font-family: Roboto, sans-serif;
     font-size: 48px;
 
+    &::before {
+      bottom: 10px;
+    }
+
+    &::after {
+      bottom: 10px;
+    }
+
     @media (hover) {
       &::before {
         background-image: linear-gradient(90deg, transparent 50%, var(--primary-color) 50%);
@@ -293,6 +318,8 @@ const StyledLink = styled(Link)`
     }
   }
 `
+
+const homeHeading = ["M","i","c","k","e","y"]
 
 const Nav = () => {
   const [openNav, setOpenNav] = useState(true)
@@ -363,14 +390,16 @@ const Nav = () => {
           >
               <Menu>
                 <MenuWrapper>
-                  <StyledLink
+                  <HomeLink
                     to="/"
                     onClick={toggleNavOnSmallDevice}
                     aria-label="Home"
                     tabIndex={hideForModal}
                   >
-                    <H1>Mickey</H1>
-                  </StyledLink>
+                  {homeHeading.map((l, i) => (
+                    <Span key={l} $i={i}>{l}</Span>
+                  ))}
+                  </HomeLink>
                   <StyledLink to="/about/" activeClassName="active" onClick={toggleNavOnSmallDevice} tabIndex={hideForModal}>
                     About
                   </StyledLink>

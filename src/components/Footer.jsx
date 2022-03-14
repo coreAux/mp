@@ -122,15 +122,15 @@ const IconLink = styled.a`
     }
   }
 
-  &:focus-visible {
-    width: 44px;
-    height: 44px;
-  }
-
-  &[data-focus-visible-added] {
-    width: 44px;
-    height: 44px;
-  }
+  // &:focus-visible {
+  //   width: 44px;
+  //   height: 44px;
+  // }
+  //
+  // &[data-focus-visible-added] {
+  //   width: 44px;
+  //   height: 44px;
+  // }
 `
 
 const StyledButton = styled(Button)`
@@ -142,6 +142,7 @@ const StyledButton = styled(Button)`
 `
 
 const FooterWrapper = styled.div`
+  --primary-color: var(--primary-color-reverse);
   min-height: 40px;
   position: sticky;
   top: 100%;
